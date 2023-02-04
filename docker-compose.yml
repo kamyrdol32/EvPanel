@@ -1,0 +1,34 @@
+version: 3.8
+
+services:
+
+    evpanel-frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        container_name: evpanel-frontend
+        restart: always
+        ports:
+            - 3000:3000
+        networks:
+            - nginx-proxy-menager_default
+            - evpanel_default
+
+    evpanel-backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        container_name: evpanel-backend
+        restart: always
+        ports:
+            - 5000:5000
+        networks:
+            - nginx-proxy-menager_default
+            - evpanel_default
+
+
+
+networks:
+    nginx-proxy-menager_default:
+        external: true
+    evpanel_default:
