@@ -1,25 +1,32 @@
-import { useState } from 'react'
+// CSS
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <div className="App">
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+// Imports
+import {useState, useEffect} from 'react'
+import {axiosGet} from "./others/requests.jsx";
+
+
+// Code
+function App() {
+
+    const [data, setData] = useState("dsf")
+
+    useEffect(() => {
+        axiosGet("/test", false)
+            .then((response) => {
+                console.log(response)
+                setData(response.data)
+            })
+    }, [])
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                fdsfd
+            </header>
+        </div>
+    )
 }
 
 export default App

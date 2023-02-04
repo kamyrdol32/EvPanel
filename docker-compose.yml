@@ -27,7 +27,6 @@ services:
             - evpanel_default
 
 
-
 networks:
     nginx-proxy-menager_default:
         external: true
