@@ -3,28 +3,32 @@ import './App.css'
 
 
 // Imports
-import {useState, useEffect} from 'react'
-import {axiosGet} from "./others/requests.jsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Navbar from "./Components/Navbar";
+import Register from "./Sites/Register";
 
+// Components
 
 // Code
 function App() {
 
-    const [data, setData] = useState("dsf")
-
-    useEffect(() => {
-        axiosGet("/test", false)
-            .then((response) => {
-                console.log(response)
-                setData(response.data)
-            })
-    }, [])
+    function Home() {
+        return (
+            <div>
+                Home
+            </div>
+        );
+    }
 
     return (
-        <div className="App">
-            <header className="App-header">
-                fdsfd
-            </header>
+        <div className="">
+            <BrowserRouter>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                </Routes>
+            </BrowserRouter>
         </div>
     )
 }

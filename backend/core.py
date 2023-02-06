@@ -1,26 +1,22 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
-import api
-
+# App initialization
 app = Flask(__name__)
 app.config.from_object('config')
-
-app.register_blueprint(api.api_blueprint, url_prefix='/api')
-
 db = SQLAlchemy()
 db.init_app(app)
 CORS(app)
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+# Importing
+import models
+import api
+import auth
 
-@app.route('/test')
-def test():
-    return jsonify({'message': 'test'})
+# Registering blueprints
+app.register_blueprint(api.api_blueprint, url_prefix='/api')
+app.register_blueprint(auth.auth_blueprint, url_prefix='/api')
 
 if __name__ == '__main__':
-    app.run()
-
+    app.run(host="0.0.0.0", debug=True)
