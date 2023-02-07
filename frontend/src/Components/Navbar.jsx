@@ -4,6 +4,7 @@ import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {Bars3Icon, UserIcon, XMarkIcon} from '@heroicons/react/24/outline'
 import {ChevronDownIcon} from "@heroicons/react/20/solid/index.js";
 import {NavLink} from "react-router-dom";
+import {axiosPost} from "../Others/requests.jsx";
 
 // Code
 const navigation = [
@@ -19,6 +20,17 @@ export default function Navbar() {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
     const [selectedServer, setSelectedServer] = useState(null)
+
+    function fetchLogin() {
+
+        const data = {
+            email: email,
+            password: password,
+        }
+
+        axiosPost("/auth/login", data)
+    }
+
 
     return (
         <Disclosure as="nav" className="bg-gray-800">
@@ -125,76 +137,76 @@ export default function Navbar() {
                                                     <Menu.Items
                                                         className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-2 ring-black ring-opacity-5 focus:outline-none border">
                                                         <div className="py-2 px-2">
-                                                            <form className="mt-2 space-y-6">
-                                                                <input type="hidden" name="remember"
-                                                                       defaultValue="true"/>
-                                                                <div className="-space-y-px rounded-md shadow-sm">
-                                                                    <div>
-                                                                        <label htmlFor="email-address"
-                                                                               className="sr-only">
-                                                                            Email address
-                                                                        </label>
-                                                                        <input
-                                                                            id="email-address"
-                                                                            name="email"
-                                                                            type="email"
-                                                                            autoComplete="email"
-                                                                            required
-                                                                            className="relative block w-full appearance-none rounded-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                                                            placeholder="Email address"
-                                                                            onChange={(event) => setEmail(event.target.value)}
-                                                                        />
-                                                                    </div>
-                                                                    <div>
-                                                                        <label htmlFor="password" className="sr-only">
-                                                                            Password
-                                                                        </label>
-                                                                        <input
-                                                                            id="password"
-                                                                            name="password"
-                                                                            type="password"
-                                                                            autoComplete="current-password"
-                                                                            required
-                                                                            className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                                                            placeholder="Password"
-                                                                            onChange={(event) => setPassword(event.target.value)}
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="flex items-center">
-                                                                    <input
-                                                                        id="remember-me"
-                                                                        name="remember-me"
-                                                                        type="checkbox"
-                                                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                                    />
-                                                                    <label htmlFor="remember-me"
-                                                                           className="ml-2 block text-sm text-gray-900">
-                                                                        Remember me
+                                                            <input type="hidden" name="remember"
+                                                                   defaultValue="true"/>
+                                                            <div className="-space-y-px rounded-md shadow-sm">
+                                                                <div>
+                                                                    <label htmlFor="email-address"
+                                                                           className="sr-only">
+                                                                        Email address
                                                                     </label>
+                                                                    <input
+                                                                        id="email-address"
+                                                                        name="email"
+                                                                        type="email"
+                                                                        autoComplete="email"
+                                                                        required
+                                                                        className="relative block w-full appearance-none rounded-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                                                        placeholder="Email address"
+                                                                        onChange={(event) => setEmail(event.target.value)}
+                                                                    />
                                                                 </div>
+                                                                <div>
+                                                                    <label htmlFor="password" className="sr-only">
+                                                                        Password
+                                                                    </label>
+                                                                    <input
+                                                                        id="password"
+                                                                        name="password"
+                                                                        type="password"
+                                                                        autoComplete="current-password"
+                                                                        required
+                                                                        className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                                                        placeholder="Password"
+                                                                        onChange={(event) => setPassword(event.target.value)}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex items-center">
+                                                                <input
+                                                                    id="remember-me"
+                                                                    name="remember-me"
+                                                                    type="checkbox"
+                                                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                                />
+                                                                <label htmlFor="remember-me"
+                                                                       className="ml-2 block text-sm text-gray-900">
+                                                                    Remember me
+                                                                </label>
+                                                            </div>
 
-                                                                <div className="text-sm">
-                                                                    <a href="#"
-                                                                       className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                                        Forgot your password?
+                                                            <div className="text-sm">
+                                                                <a href="#"
+                                                                   className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                                    Forgot your password?
+                                                                </a>
+                                                            </div>
+                                                            <div className="text-sm">
+                                                                <NavLink to="/register" key="register">
+                                                                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                                        You don't have account?
                                                                     </a>
-                                                                </div>
-                                                                <div className="text-sm">
-                                                                    <NavLink to="/register" key="register">
-                                                                        <a className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                                            You don't have account?
-                                                                        </a>
-                                                                    </NavLink>
-                                                                </div>
-                                                                <div className="flex w-full justify-center">
-                                                                    <button
-                                                                        type="submit"
-                                                                        className="bg-indigo-300 px-5 py-2 rounded rounded-full border border-indigo-600 font-medium">
-                                                                        Login
-                                                                    </button>
-                                                                </div>
-                                                            </form>
+                                                                </NavLink>
+                                                            </div>
+                                                            <div className="flex w-full justify-center">
+                                                                <button
+                                                                    className="bg-indigo-300 px-5 py-2 rounded rounded-full border border-indigo-600 font-medium"
+                                                                    onClick={fetchLogin}
+                                                                >
+
+                                                                    Login
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </Menu.Items>
                                                 </Transition>

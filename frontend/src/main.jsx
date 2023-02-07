@@ -1,7 +1,3 @@
-// CSS
-import './index.css'
-
-
 // Components
 import App from './App'
 

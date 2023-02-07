@@ -8,7 +8,7 @@ class User(db.Model):
     Email = db.Column(db.String(128), unique=True, nullable=False)
     Username = db.Column(db.String(128), unique=True, nullable=False)
     Password = db.Column(db.String(128), nullable=False)
-    Phone = db.Column(db.String(128), nullable=True)
+    Role = db.relationship('Role', backref='User', lazy=True)
     Created_Date = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __init__(self, Email, Username, Password):
@@ -19,6 +19,21 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.Username
 
+
+class Role(db.Model):
+    __tablename__ = 'Roles'
+    ID = db.Column(db.Integer, primary_key=True)
+    Name = db.Column(db.String(128), unique=True, nullable=False)
+    User_ID = db.Column(db.Integer, db.ForeignKey('Users.ID'), nullable=False)
+    Created_Date = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+    def __init__(self, Name, User_ID):
+        self.Name = Name
+        self.User_ID = User_ID
+
+    def __repr__(self):
+        return '<Role %r>' % self.Name
 
 class Servers(db.Model):
     __tablename__ = 'Servers'
