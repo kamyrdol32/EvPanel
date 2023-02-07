@@ -11,5 +11,15 @@ export default defineConfig({
         host: true, // needed for the Docker Container port mapping to work
         strictPort: true,
         port: 3000, // you can replace this port with any port
+        proxy: {
+            '/auth': {
+                target: 'http://localhost:5000',
+                changeOrigin: true,
+            },
+            '/api': {
+                target: 'http://localhost:5000',
+                changeOrigin: true,
+            }
+        }
     }
 })

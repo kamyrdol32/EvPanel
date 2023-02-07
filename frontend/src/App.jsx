@@ -2,16 +2,30 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 
-// Imports
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Navbar from "./Components/Navbar";
-import Register from "./Sites/Register";
-import {ToastContainer} from "react-toastify";
-
 // Components
+import Navbar from "./Components/Navbar";
+import Login from "./Sites/Login";
+import Register from "./Sites/Register";
+import Logout from "./Sites/Logout";
+
+
+// Imports
+import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
+import {createContext} from "react";
+import {axiosPost} from "./Others/requests.jsx";
+import {ToastContainer} from "react-toastify";
+import useAuth from "./Contexts/Auth.jsx";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
 
 // Code
+const queryClient = new QueryClient()
+export const authContext = createContext()
+
+
 function App() {
+
+    const {setUser, removeUser, isUser, getUser, fetchAuthorization} = useAuth()
 
     function Home() {
         return (
@@ -21,27 +35,42 @@ function App() {
         );
     }
 
+
+    function Dashboard() {
+
+        return (
+            <div>
+                Dashboard
+            </div>
+        );
+    }
+
     return (
-        <div className="">
-            <BrowserRouter>
-                <Navbar/>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/register" element={<Register/>}/>
-                </Routes>
-                <ToastContainer
-                    position="bottom-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
-            </BrowserRouter>
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <authContext.Provider value={{setUser, removeUser, isUser, getUser, fetchAuthorization}}>
+                <BrowserRouter>
+                    <Navbar/>
+                    <Routes>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/dashboard" element={<Dashboard/>}/>
+                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/logout" element={<Logout/>}/>
+                    </Routes>
+                    <ToastContainer
+                        position="bottom-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
+                </BrowserRouter>
+            </authContext.Provider>
+        </QueryClientProvider>
     )
 }
 

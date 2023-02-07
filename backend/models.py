@@ -1,14 +1,16 @@
 from datetime import datetime
 
 from core import db
+from core import app
 
-class User(db.Model):
+class Users(db.Model):
     __tablename__ = 'Users'
     ID = db.Column(db.Integer, primary_key=True)
     Email = db.Column(db.String(128), unique=True, nullable=False)
     Username = db.Column(db.String(128), unique=True, nullable=False)
     Password = db.Column(db.String(128), nullable=False)
-    Role = db.relationship('Role', backref='User', lazy=True)
+    Role = db.relationship('Roles', backref='Users', lazy=True)
+    Avatar = db.Column(db.Text(10000000), unique=False, nullable=True)
     Created_Date = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __init__(self, Email, Username, Password):
@@ -20,7 +22,7 @@ class User(db.Model):
         return '<User %r>' % self.Username
 
 
-class Role(db.Model):
+class Roles(db.Model):
     __tablename__ = 'Roles'
     ID = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.String(128), unique=True, nullable=False)
@@ -35,16 +37,17 @@ class Role(db.Model):
     def __repr__(self):
         return '<Role %r>' % self.Name
 
-class Servers(db.Model):
-    __tablename__ = 'Servers'
+
+class Logs(db.Model):
+    __tablename__ = 'Logs'
     ID = db.Column(db.Integer, primary_key=True)
-    Name = db.Column(db.String(128), nullable=False)
-    Server_ID = db.Column(db.String(128), nullable=False)
+    User_ID = db.Column(db.Integer, db.ForeignKey('Users.ID'), nullable=False)
+    Message = db.Column(db.String(128), nullable=False)
     Created_Date = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, Name, Server_ID):
-        self.Name = Name
-        self.Server_ID = Server_ID
+    def __init__(self, User_ID, Message):
+        self.User_ID = User_ID
+        self.Message = Message
 
     def __repr__(self):
-        return '<Server %r>' % self.Name
+        return '<Log %r>' % self.Message
