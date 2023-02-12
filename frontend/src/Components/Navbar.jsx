@@ -2,11 +2,12 @@
 import {Fragment, useContext, useState} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
-import {BellIcon, UserIcon} from "@heroicons/react/24/solid/index.js";
+import {BellIcon, LanguageIcon, MoonIcon, SunIcon, UserIcon} from "@heroicons/react/24/solid/index.js";
 import {NavLink} from "react-router-dom";
-import {axiosPost} from "../Others/requests.jsx";
 import {authContext} from "../App.jsx";
-import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
+import {useTranslation} from 'react-i18next';
+import useLocalStorage from "use-local-storage";
 
 // Code
 const navigation = [
@@ -14,18 +15,28 @@ const navigation = [
     {name: 'Dashboard', href: '/dashboard'},
 ]
 
+const languages = [
+    {name: 'Polish', value: 'pl', Image: "/src/Images/Flags/PL.jpg"},
+    {name: 'English', value: 'en', Image: "/src/Images/Flags/ENG.jpg"},
+]
+
 export default function Navbar() {
 
-    const queryClient = useQueryClient()
-
-    const {isUser, getUser, fetchAuthorization} = useContext(authContext)
-
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
+    const {isUser, fetchAuthorization} = useContext(authContext)
+    const {t, i18n} = useTranslation();
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [theme, setTheme] = useLocalStorage("theme", "dark")
 
-    const {data, isLoading} = useQuery(['Authorization'], fetchAuthorization)
+    useQuery(['Authorization'], fetchAuthorization)
+
+    function changeTheme() {
+        if (theme === "light") {
+            setTheme("dark")
+        } else {
+            setTheme("light")
+        }
+    }
 
     return (
         <Disclosure as="nav" className="bg-gray-800">
@@ -34,7 +45,7 @@ export default function Navbar() {
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         {/* Mobile menu button*/}
                         <Disclosure.Button
-                            className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                            className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none">
                             <span className="sr-only">Open main menu</span>
                             {sidebarOpen ? (
                                 <XMarkIcon onClick={() => setSidebarOpen(!sidebarOpen)} className="block h-6 w-6"
@@ -49,12 +60,12 @@ export default function Navbar() {
                         <div className="flex flex-shrink-0 items-center">
                             <img
                                 className="block h-8 w-auto lg:hidden"
-                                src="/src/Images/discord.png"
+                                src="src/Images/discord.png"
                                 alt="EvPanel"
                             />
                             <img
                                 className="hidden h-8 w-auto lg:block"
-                                src="/src/Images/discord.png"
+                                src="src/Images/discord.png"
                                 alt="EvPanel"
                             />
                         </div>
@@ -83,30 +94,28 @@ export default function Navbar() {
                                 className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 <button
                                     type="button"
-                                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none hover:bg-gray-700 hover:text-white"
                                 >
                                     <span className="sr-only">View notifications</span>
-                                    <BellIcon className="h-6 w-6" aria-hidden="true"/>
+                                    <BellIcon className="h-5 w-5 text-white" aria-hidden="true"/>
                                 </button>
 
                                 {/* Profile dropdown */}
                                 <Menu as="div" className="relative ml-3">
-                                    <div>
-                                        <Menu.Button
-                                            className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                            <span className="sr-only">Open user menu</span>
-                                            {localStorage.getItem("avatar") ? (
-                                                <img
-                                                    className="h-8 w-8 rounded-full"
-                                                    src={localStorage.getItem("avatar")}
-                                                    alt=""
-                                                />
-                                            ) : (
-                                                <UserIcon className="h-5 w-5 text-white" aria-hidden="true"/>
-                                            )}
+                                    <Menu.Button
+                                        className="flex rounded-full p-1 bg-gray-800 text-sm focus:outline-none hover:bg-gray-700 hover:text-white">
+                                        <span className="sr-only">Open user menu</span>
+                                        {localStorage.getItem("avatar") ? (
+                                            <img
+                                                className="h-8 w-8 rounded-full"
+                                                src={localStorage.getItem("avatar")}
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <UserIcon className="h-5 w-5 text-white" aria-hidden="true"/>
+                                        )}
 
-                                        </Menu.Button>
-                                    </div>
+                                    </Menu.Button>
                                     <Transition
                                         as={Fragment}
                                         enter="transition ease-out duration-100"
@@ -117,7 +126,7 @@ export default function Navbar() {
                                         leaveTo="transform opacity-0 scale-95"
                                     >
                                         <Menu.Items
-                                            className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg divide-y divide-indigo-300">
                                             <Menu.Item>
                                                 <NavLink to="/logout" key="logout">
                                                     <span
@@ -126,6 +135,22 @@ export default function Navbar() {
                                                         Sign out
                                                     </span>
                                                 </NavLink>
+                                            </Menu.Item>
+                                            <Menu.Item>
+                                                <div className="hidden sm:block">
+                                                    <div
+                                                        className="flex flex-1 items-center justify-center items-stretch justify-start">
+                                                        {languages.map((item) => (
+                                                            <div
+                                                                className="mx-2 my-2 text-base font-medium border border-indigo-300">
+                                                                <img src={item.Image} key={item.value}
+                                                                     onClick={() => i18n.changeLanguage(item.value)}
+                                                                     className="h-5 w-8" alt="EvPanel"/>
+                                                            </div>
+
+                                                        ))}
+                                                    </div>
+                                                </div>
                                             </Menu.Item>
                                         </Menu.Items>
                                     </Transition>
@@ -154,22 +179,49 @@ export default function Navbar() {
                         )}
 
                     </div>
+                    <div
+                        className="hidden sm:block rounded-full bg-gray-800 p-1 ml-3 text-gray-400 hover:text-white focus:outline-none hover:bg-gray-700 hover:text-white">
+                        <LanguageIcon className="h-5 w-5 text-white"></LanguageIcon>
+                    </div>
+                    <div
+                        className="rounded-full bg-gray-800 p-1 ml-3 text-gray-400 hover:text-white focus:outline-none hover:bg-gray-700 hover:text-white"
+                        onClick={() => {changeTheme()}}>
+                        {theme === "dark" ? (
+                            <MoonIcon className="h-5 w-5 text-white"></MoonIcon>
+                        ) : (
+                            <SunIcon className="h-5 w-5 text-white"></SunIcon>
+                        )}
+                    </div>
 
                 </div>
             </div>
 
+
+            {/* Phone - Menu*/}
             <Disclosure.Panel className="sm:hidden">
-                <div className="space-y-1 px-2 pt-2 pb-3">
+                <div className="space-y-1 px-2 pt-2 pb-3 text-white divide-y divide-indigo-300">
                     {navigation.map((item) => (
                         <Disclosure.Button
                             key={item.name}
                             as="a"
                             href={item.href}
-                            className={'block px-3 py-2 rounded-md text-base font-medium'}
+                            className={'block px-3 py-2 text-base font-medium'}
                         >
                             {item.name}
                         </Disclosure.Button>
                     ))}
+                    <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        {languages.map((item) => (
+                            <Disclosure.Button
+                                key={item.name}
+                                as="a"
+                                className='block px-3 py-3 text-base font-medium'
+                            >
+                                <img src={item.Image} key={item.value} onClick={() => i18n.changeLanguage(item.value)}
+                                     className="h-5 w-8" alt="EvPanel"/>
+                            </Disclosure.Button>
+                        ))}
+                    </div>
                 </div>
             </Disclosure.Panel>
         </Disclosure>
