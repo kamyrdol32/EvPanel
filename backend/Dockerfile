@@ -3,6 +3,13 @@ FROM python:3.9.0-slim-buster
 # Create app directory
 WORKDIR /backend
 
+# Environment variables
+ENV FLASK_APP=core.py
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
+ENV FLASK_RUN_PORT=5001
+
 # Copy requirements.txt
 COPY requirements.txt .
 
@@ -16,5 +23,5 @@ COPY . .
 EXPOSE 5000
 
 # Run app
-CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "core:app"]
 
