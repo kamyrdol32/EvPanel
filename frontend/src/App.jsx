@@ -46,31 +46,33 @@ function App() {
     }
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <authContext.Provider value={{setUser, removeUser, isUser, getUser, fetchAuthorization}}>
-                <BrowserRouter>
-                    <Navbar/>
-                    <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/dashboard" element={<Dashboard/>}/>
-                        <Route path="/register" element={<Register/>}/>
-                        <Route path="/login" element={<Login/>}/>
-                        <Route path="/logout" element={<Logout/>}/>
-                    </Routes>
-                    <ToastContainer
-                        position="bottom-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    />
-                </BrowserRouter>
-            </authContext.Provider>
-        </QueryClientProvider>
+        <div className="min-h-screen dark:bg-gray-600 bg-gray-100">
+            <QueryClientProvider client={queryClient}>
+                <authContext.Provider value={{setUser, removeUser, isUser, getUser, fetchAuthorization}}>
+                    <BrowserRouter>
+                        <Navbar/>
+                        <Routes>
+                            <Route path="/" element={<Home/>}/>
+                            <Route path="/dashboard" element={<Dashboard/>}/>
+                            <Route path="/register" element={<Register/>}/>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/logout" element={<Logout/>}/>
+                        </Routes>
+                        <ToastContainer
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
+                    </BrowserRouter>
+                </authContext.Provider>
+            </QueryClientProvider>
+        </div>
     )
 }
 
