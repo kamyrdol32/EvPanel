@@ -12,7 +12,6 @@ services:
             - 3000:3000
         networks:
             - default
-            - evpanel_default
 
     evpanel-backend:
         build:
@@ -24,8 +23,3 @@ services:
             - 5000:5000
         networks:
             - default
-            - evpanel_default
-
-
-networks:
-    evpanel_default:

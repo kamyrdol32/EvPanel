@@ -1,8 +1,6 @@
 // Imports
-import {axiosGet, axiosPost, getCookie} from "../Others/requests.jsx";
+import {axiosPost, getCookie} from "../Others/requests.jsx";
 import useLocalStorage from "use-local-storage";
-import {toast} from "react-toastify";
-import {json} from "react-router-dom";
 
 // Code
 export default function useAuth() {

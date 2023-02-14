@@ -1,15 +1,15 @@
-import hashlib
 from datetime import datetime, timezone, timedelta
 
+import bcrypt
 from flask import Blueprint, jsonify, request
 from flask_cors import cross_origin, CORS
 from flask_jwt_extended import create_access_token, set_access_cookies, create_refresh_token, set_refresh_cookies, \
     unset_jwt_cookies, get_jwt_identity, get_jwt, jwt_required
 
 import api
-from models import Users, Logs
-from core import db, app
-from logs import log
+from app import db
+from models import Users
+from others import passwordGenerator
 
 auth_blueprint = Blueprint('auth', __name__)
 
@@ -32,29 +32,30 @@ def register():
         if len(password) < 6 or len(confirmPassword) < 6:
             return jsonify({"error": "Password must be at least 6 characters long"}), 400
 
-        if Users.query.filter_by(Email=email).first():
+        if Users.query.filter_by(email=email).first():
             return jsonify({"error": "Email already exists"}), 400
 
-        if Users.query.filter_by(Username=username).first():
+        if Users.query.filter_by(username=username).first():
             return jsonify({"error": "Username already exists"}), 400
 
-        user = Users(Email=email, Username=username, Password=hashlib.sha256(password.encode()).hexdigest())
+        # Hashing password
+        salt = bcrypt.gensalt()
+        key = passwordGenerator()
+
+        password_hashed = password + key
+        password_hashed = password_hashed.encode('utf-8')
+        password_hashed = bcrypt.hashpw(password_hashed, salt)
+
+
+        user = Users(email=email, username=username, password=str(password_hashed), key=key)
         if user:
             db.session.add(user)
             db.session.commit()
 
-            # Logs
-            log(user.ID, "User logged in")
-
-
-            # Create access token
-            access_token = create_access_token(identity=user.Username)
-            response = jsonify({"message": "User created successfully", "user": user.Username ,"avatar": user.Avatar})
-            set_access_cookies(response, access_token)
-
-            return response, 200
+            return jsonify({"message": "User created successfully. Please confirm your email."}), 200
 
     except Exception as error:
+        print(error)
         return jsonify({"error": str(error)}), 400
 
 
@@ -68,20 +69,29 @@ def login():
         if not email or not password:
             return jsonify({"error": "Please fill all fields"}), 400
 
-        user = Users.query.filter_by(Email=email).first()
+        user = Users.query.filter_by(email=email).first()
 
         if not user:
             return jsonify({"error": "User does not exist"}), 400
 
-        if user.Password != hashlib.sha256(password.encode()).hexdigest():
+        if not user.is_active:
+            return jsonify({"error": "User is not active"}), 400
+
+        # Hashing password
+        salt = bcrypt.gensalt()
+        key = user.key
+
+        password_hashed = password + key
+        password_hashed = password_hashed.encode('utf-8')
+        password_hashed = bcrypt.hashpw(password_hashed, salt)
+
+
+        if bcrypt.checkpw(user.password.encode('utf-8'), password_hashed):
             return jsonify({"error": "Invalid password"}), 400
 
-        # Logs
-        log(user.ID, "User logged in")
-
         # Create the tokens we will be sending back to the user
-        access_token = create_access_token(identity=user.Username)
-        response = jsonify({"message": "Login successful", "user": user.Username ,"avatar": user.Avatar})
+        access_token = create_access_token(identity=user.username)
+        response = jsonify({"message": "Login successful", "user": user.username ,"avatar": user.avatar})
         set_access_cookies(response, access_token)
 
         return response, 200
