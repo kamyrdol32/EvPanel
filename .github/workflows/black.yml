@@ -1,9 +1,5 @@
 name: Black
-on:
-  pull_request:
-    paths:
-      - Dockerfile
-      - backend/**
+on: [push, pull_request]
 
 permissions: read-all
 
@@ -21,3 +17,4 @@ jobs:
         uses: psf/black@stable
         with:
           version: ${{ env.BLACK_VERSION }}
+          src: "./backend"
