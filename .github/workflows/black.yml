@@ -6,5 +6,13 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: psf/black@stable
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: get black version
+        run: |
+          export VERSION=$(grep -Po 'black==\K.*' requirements_dev.txt)
+          echo "BLACK_VERSION=$VERSION" >> $GITHUB_ENV
+      - name: run black
+        uses: psf/black@stable
+        with:
+          version: ${{ env.BLACK_VERSION }}
