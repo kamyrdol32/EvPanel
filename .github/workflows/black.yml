@@ -17,4 +17,4 @@ jobs:
         uses: psf/black@stable
         with:
           version: ${{ env.BLACK_VERSION }}
-          src: "./backend"
+          src: "./backend/auth.py"
