@@ -10,6 +10,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: run black
-      - uses: psf/black@stable
+        uses: psf/black@stable
         with:
           src: "./backend/auth.py"
