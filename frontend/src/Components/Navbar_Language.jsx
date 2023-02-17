@@ -31,7 +31,7 @@ export default function Navbar_Language() {
                 <Menu.Items
                     className="dark:bg-gray-800 bg-gray-100 border-2 border-indigo-300 absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg divide-y divide-indigo-300">
                     {languages.map((language) => (
-                        <Menu.Item>
+                        <Menu.Item key={language.name}>
                             <span className="flex block px-4 py-2 text-sm dark:text-gray-100 text-gray-800" onClick={() => changeLanguage(language.value)}>
                                 <img src={language.Image} className="h-4 w-6 mr-2 border border-indigo-300" alt=""/>
                                 <div className="ml-3">{language.name}</div>

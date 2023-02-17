@@ -7,15 +7,16 @@ import Navbar from "./Components/Navbar";
 import Login from "./Sites/Login";
 import Register from "./Sites/Register";
 import Logout from "./Sites/Logout";
+import Activate from "./Sites/Activate";
 
 
 // Imports
-import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {createContext} from "react";
-import {axiosPost} from "./Others/requests.jsx";
 import {ToastContainer} from "react-toastify";
 import useAuth from "./Contexts/Auth.jsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import Protected from "./Others/Protected.jsx";
 
 
 // Code
@@ -53,10 +54,16 @@ function App() {
                         <Navbar/>
                         <Routes>
                             <Route path="/" element={<Home/>}/>
-                            <Route path="/dashboard" element={<Dashboard/>}/>
+                            <Route path="/dashboard" element={
+                                <Protected isSignedIn={fetchAuthorization()}>
+                                    <Dashboard/>
+                                </Protected>
+                            }/>
                             <Route path="/register" element={<Register/>}/>
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/logout" element={<Logout/>}/>
+                            <Route path="/activate/:KEY" element={<Activate/>}/>
+                            <Route path="*" element={<div>404</div>}/>
                         </Routes>
                         <ToastContainer
                             position="bottom-right"

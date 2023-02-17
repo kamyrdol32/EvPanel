@@ -2,26 +2,32 @@ from datetime import datetime, timezone, timedelta
 
 import bcrypt
 from flask import Blueprint, jsonify, request
-from flask_cors import cross_origin, CORS
-from flask_jwt_extended import create_access_token, set_access_cookies, create_refresh_token, set_refresh_cookies, \
-    unset_jwt_cookies, get_jwt_identity, get_jwt, jwt_required
+from flask_cors import cross_origin
+from flask_jwt_extended import (
+    create_access_token,
+    set_access_cookies,
+    unset_jwt_cookies,
+    get_jwt_identity,
+    get_jwt,
+    jwt_required,
+)
 
-import api
 from app import db
+from api import api_blueprint
 from models import Users
-from others import passwordGenerator
+from others import passwordGenerator, send_welcome_email
 
-auth_blueprint = Blueprint('auth', __name__)
+auth_blueprint = Blueprint("auth", __name__)
 
 
-@auth_blueprint.route('/register', methods=['POST'])
+@auth_blueprint.route("/register", methods=["POST"])
 @cross_origin()
 def register():
     try:
-        email = request.json.get('email')
-        username = request.json.get('username')
-        password = request.json.get('password')
-        confirmPassword = request.json.get('confirmPassword')
+        email = request.json.get("email")
+        username = request.json.get("username")
+        password = request.json.get("password")
+        confirmPassword = request.json.get("confirmPassword")
 
         if not email or not password or not confirmPassword or not username:
             return jsonify({"error": "Please fill all fields"}), 400
@@ -30,7 +36,10 @@ def register():
             return jsonify({"error": "Passwords do not match"}), 400
 
         if len(password) < 6 or len(confirmPassword) < 6:
-            return jsonify({"error": "Password must be at least 6 characters long"}), 400
+            return (
+                jsonify({"error": "Password must be at least 6 characters long"}),
+                400,
+            )
 
         if Users.query.filter_by(email=email).first():
             return jsonify({"error": "Email already exists"}), 400
@@ -43,28 +52,35 @@ def register():
         key = passwordGenerator()
 
         password_hashed = password + key
-        password_hashed = password_hashed.encode('utf-8')
+        password_hashed = password_hashed.encode("utf-8")
         password_hashed = bcrypt.hashpw(password_hashed, salt)
 
-
-        user = Users(email=email, username=username, password=str(password_hashed), key=key)
+        user = Users(
+            email=email, username=username, password=str(password_hashed), key=key
+        )
         if user:
             db.session.add(user)
             db.session.commit()
+            send_welcome_email(username, email, key)
 
-            return jsonify({"message": "User created successfully. Please confirm your email."}), 200
+            return (
+                jsonify(
+                    {"message": "User created successfully. Please confirm your email."}
+                ),
+                200,
+            )
 
     except Exception as error:
         print(error)
         return jsonify({"error": str(error)}), 400
 
 
-@auth_blueprint.route('/login', methods=['POST'])
+@auth_blueprint.route("/login", methods=["POST"])
 @cross_origin()
 def login():
     try:
-        email = request.json.get('email')
-        password = request.json.get('password')
+        email = request.json.get("email")
+        password = request.json.get("password")
 
         if not email or not password:
             return jsonify({"error": "Please fill all fields"}), 400
@@ -82,16 +98,21 @@ def login():
         key = user.key
 
         password_hashed = password + key
-        password_hashed = password_hashed.encode('utf-8')
+        password_hashed = password_hashed.encode("utf-8")
         password_hashed = bcrypt.hashpw(password_hashed, salt)
 
-
-        if bcrypt.checkpw(user.password.encode('utf-8'), password_hashed):
+        if bcrypt.checkpw(user.password.encode("utf-8"), password_hashed):
             return jsonify({"error": "Invalid password"}), 400
 
         # Create the tokens we will be sending back to the user
         access_token = create_access_token(identity=user.username)
-        response = jsonify({"message": "Login successful", "user": user.username ,"avatar": user.avatar})
+        response = jsonify(
+            {
+                "message": "Login successful",
+                "user": user.username,
+                "avatar": user.avatar,
+            }
+        )
         set_access_cookies(response, access_token)
 
         return response, 200
@@ -100,7 +121,7 @@ def login():
         return jsonify({"error": str(error)}), 400
 
 
-@auth_blueprint.route('/logout', methods=['POST'])
+@auth_blueprint.route("/logout", methods=["POST"])
 @cross_origin()
 def logout():
     try:
@@ -112,7 +133,23 @@ def logout():
         return jsonify({"error": str(error)}), 400
 
 
-@auth_blueprint.route('/isAuthenticated', methods=['POST'])
+@auth_blueprint.route("/activate/<key>", methods=["GET"])
+@cross_origin()
+def activate(key):
+    try:
+        user = Users.query.filter_by(key=key).first()
+        if user:
+            user.is_active = True
+            db.session.commit()
+            return jsonify({"message": "User activated successfully"}), 200
+        else:
+            return jsonify({"error": "User does not exist"}), 400
+
+    except Exception as error:
+        return jsonify({"error": str(error)}), 400
+
+
+@auth_blueprint.route("/isAuthenticated", methods=["POST"])
 @cross_origin()
 @jwt_required()
 def isAuthenticated():
@@ -127,7 +164,7 @@ def isAuthenticated():
 
 
 @auth_blueprint.after_request
-@api.api_blueprint.after_request
+@api_blueprint.after_request
 def refresh_expiring_jwts(response):
     try:
         exp_timestamp = get_jwt()["exp"]
