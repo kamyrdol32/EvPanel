@@ -42,7 +42,7 @@ export default function Navbar_Profile() {
                             <span
                                 className='flex block px-4 py-2 text-sm dark:text-gray-100 text-gray-800'
                             >
-                                Sign out
+                                {t("sign_out")}
                             </span>
                         </NavLink>
                     </Menu.Item>

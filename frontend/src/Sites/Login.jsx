@@ -3,10 +3,12 @@ import {useContext, useState} from "react";
 import {axiosPost} from "../Others/requests.jsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import {authContext} from "../App.jsx";
+import {useTranslation} from "react-i18next";
 
 // Code
 export default function Login() {
 
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const {setUser} = useContext(authContext)
 
@@ -41,7 +43,7 @@ export default function Login() {
             <div className="w-full max-w-md space-y-8">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Sign in to your account
+                        {t("sign_in_to_your_account")}
                     </h2>
                 </div>
                 <form className="space-y-8">
@@ -68,7 +70,7 @@ export default function Login() {
                         </div>
                         <div>
                             <label htmlFor="password" className="sr-only">
-                                Password
+                                {t("password")}
                             </label>
                             <input
                                 id="password"
@@ -80,7 +82,7 @@ export default function Login() {
                                 relative block w-full appearance-none rounded-none rounded-t-md border border-indigo-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm
                                 text-gray-800  bg-white placeholder-gray-800
                                 dark:text-white dark:bg-gray-800 dark:placeholder-white
-                                " placeholder="Password"
+                                " placeholder={t("password")}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
@@ -95,13 +97,13 @@ export default function Login() {
                                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                             />
                             <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                Remember me
+                                {t("rember_me")}
                             </label>
                         </div>
 
                         <div className="text-sm">
                             <a href="#" className="font-medium text-indigo-600 hover:text-indigo-300">
-                                Forgot your password?
+                                {t("forgot_your_password?")}
                             </a>
                         </div>
                     </div>
@@ -113,7 +115,7 @@ export default function Login() {
                         className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         onClick={fetchLogin}
                     >
-                        Sign in
+                        {t("sign_in")}
                     </button>
                     <div>
                         <NavLink to="/register" key="register">
@@ -125,7 +127,7 @@ export default function Login() {
                                 "
                                 onClick={fetchLogin}
                             >
-                                Sign up
+                                {t("sign_up")}
                             </button>
                         </NavLink>
                     </div>

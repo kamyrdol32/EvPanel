@@ -1,3 +1,12 @@
+// Components
+import Navbar_Logo from "./Navbar_Logo.jsx";
+import Navbar_Bell from "./Navbar_Bell.jsx";
+import Navbar_Profile from "./Navbar_Profile";
+import Navbar_Auth from "./Navbar_Auth";
+import Navbar_Language from "./Navbar_Language";
+import Navbar_Theme from "./Navbar_Theme";
+
+
 // Imports
 import {useContext, useState} from 'react'
 import {Disclosure} from '@headlessui/react'
@@ -6,17 +15,13 @@ import {NavLink} from "react-router-dom";
 import {authContext} from "../App.jsx";
 import {useQuery} from "@tanstack/react-query";
 import {useTranslation} from 'react-i18next';
-import Navbar_Logo from "./Navbar_Logo.jsx";
-import Navbar_Bell from "./Navbar_Bell.jsx";
-import Navbar_Profile from "./Navbar_Profile";
-import Navbar_Auth from "./Navbar_Auth";
-import Navbar_Language from "./Navbar_Language";
-import Navbar_Theme from "./Navbar_Theme";
+import Loader from "./Loading";
+
 
 // Code
 const navigation = [
     {name: 'EvPanel', href: '/'},
-    {name: 'Dashboard', href: '/dashboard'},
+    {name: 'dashboard', href: '/dashboard'},
 ]
 
 export const languages = [
@@ -70,7 +75,7 @@ export default function Navbar() {
                                             }
                                         >
 
-                                            {item.name}
+                                            {t(item.name)}
                                         </div>
                                     </NavLink>
 
@@ -115,7 +120,7 @@ export default function Navbar() {
                             href={item.href}
                             className={'block px-3 py-2 text-base font-medium'}
                         >
-                            {item.name}
+                            {t(item.name)}
                         </Disclosure.Button>
                     ))}
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">

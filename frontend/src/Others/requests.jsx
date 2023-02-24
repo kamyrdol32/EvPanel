@@ -1,6 +1,5 @@
 import axios from "axios";
 import {toast} from "react-toastify";
-import {useNavigate} from "react-router-dom";
 
 
 let default_url = "";
@@ -18,7 +17,21 @@ export function axiosGet(url, tokenRequired) {
         'Content-Type': 'application/json',
     }
 
-    return axios.get(default_url + url, {headers: headers})
+    const getData =  axios.get(default_url + url, {headers: headers})
+
+    getData
+        .then((response) => {
+            console.log(response.data)
+            if (response.status === 200) {
+                toast.success(response.data.message)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            toast.error(error.response.data.error)
+        })
+
+    return getData
 }
 
 

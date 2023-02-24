@@ -4,10 +4,12 @@ import {useContext, useState} from "react";
 import {axiosPost} from "../Others/requests.jsx";
 import {useNavigate} from "react-router-dom";
 import {authContext} from "../App.jsx";
+import {useTranslation} from "react-i18next";
 
 // Code
 export default function Register() {
 
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const {setIsAuthenticated, setUser} = useContext(authContext)
 
@@ -42,7 +44,7 @@ export default function Register() {
             <div className="w-full max-w-md space-y-8">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                        Sign up your account
+                        {t("sign_up_your_account")}
                     </h2>
                 </div>
                 <form className="space-y-8">
@@ -65,7 +67,7 @@ export default function Register() {
                         </div>
                         <div>
                             <label htmlFor="email-address" className="sr-only">
-                                Username
+                                {t("username")}
                             </label>
                             <input
                                 id="username"
@@ -74,13 +76,13 @@ export default function Register() {
                                 autoComplete="username"
                                 required
                                 className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Username"
+                                placeholder={t("username")}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
                         <div>
                             <label htmlFor="password" className="sr-only">
-                                Password
+                                {t("password")}
                             </label>
                             <input
                                 id="password"
@@ -89,13 +91,13 @@ export default function Register() {
                                 autoComplete="current-password"
                                 required
                                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Password"
+                                placeholder={t("password")}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <div>
                             <label htmlFor="password" className="sr-only">
-                                Repeat password
+                                {t("repeat_password")}
                             </label>
                             <input
                                 id="repeat-password"
@@ -104,29 +106,9 @@ export default function Register() {
                                 autoComplete="current-password"
                                 required
                                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Repeat password"
+                                placeholder={t("repeat_password")}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                            <input
-                                id="remember-me"
-                                name="remember-me"
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                Remember me
-                            </label>
-                        </div>
-
-                        <div className="text-sm">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-300">
-                                Forgot your password?
-                            </a>
                         </div>
                     </div>
                 </form>
@@ -139,7 +121,7 @@ export default function Register() {
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
                 </span>
-                        Sign in
+                        {t("sign_up")}
                     </button>
                 </div>
             </div>

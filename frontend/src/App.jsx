@@ -8,6 +8,8 @@ import Login from "./Sites/Login";
 import Register from "./Sites/Register";
 import Logout from "./Sites/Logout";
 import Activate from "./Sites/Activate";
+import Home from "./Sites/Home";
+import Dashboard from "./Sites/Dashboard";
 
 
 // Imports
@@ -28,26 +30,8 @@ function App() {
 
     const {setUser, removeUser, isUser, getUser, fetchAuthorization} = useAuth()
 
-    function Home() {
-        return (
-            <div>
-                Home
-            </div>
-        );
-    }
-
-
-    function Dashboard() {
-
-        return (
-            <div>
-                Dashboard
-            </div>
-        );
-    }
-
     return (
-        <div className="min-h-screen dark:bg-gray-600 bg-gray-100">
+        <div className="min-h-screen dark:bg-gray-600 bg-gray-100 text-gray-900 dark:text-white">
             <QueryClientProvider client={queryClient}>
                 <authContext.Provider value={{setUser, removeUser, isUser, getUser, fetchAuthorization}}>
                     <BrowserRouter>

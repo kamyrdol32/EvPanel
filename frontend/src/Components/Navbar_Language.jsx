@@ -3,12 +3,15 @@ import {LanguageIcon} from "@heroicons/react/24/solid/index.js";
 import {Menu, Transition} from "@headlessui/react";
 import {Fragment} from "react";
 import {languages} from "./Navbar.jsx";
+import {useTranslation} from "react-i18next";
 
 // Code
 export default function Navbar_Language() {
 
+    const { t, i18n } = useTranslation();
+
     function changeLanguage(language) {
-        localStorage.setItem("language", language)
+        i18n.changeLanguage(language)
     }
 
     return (

@@ -49,7 +49,7 @@ def register():
 
         # Hashing password
         salt = bcrypt.gensalt()
-        key = passwordGenerator()
+        key = passwordGenerator(username)
 
         password_hashed = password + key
         password_hashed = password_hashed.encode("utf-8")
@@ -138,12 +138,16 @@ def logout():
 def activate(key):
     try:
         user = Users.query.filter_by(key=key).first()
-        if user:
-            user.is_active = True
-            db.session.commit()
-            return jsonify({"message": "User activated successfully"}), 200
-        else:
+
+        if not user:
             return jsonify({"error": "User does not exist"}), 400
+
+        if user.is_active:
+            return jsonify({"error": "User is already active"}), 400
+
+        user.is_active = True
+        db.session.commit()
+        return jsonify({"message": "User activated successfully"}), 200
 
     except Exception as error:
         return jsonify({"error": str(error)}), 400

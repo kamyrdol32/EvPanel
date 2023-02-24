@@ -17,7 +17,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy app source code
-COPY . .
+COPY ../../backend2 .
 
 # Expose port 3000
 EXPOSE 5000

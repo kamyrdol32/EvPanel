@@ -1,13 +1,14 @@
+import hashlib
 import random
-import string
+
 
 from flask_mail import Message
 from app import mail
 
 
-def passwordGenerator(stringlength=16):
-    letters = string.ascii_lowercase
-    return "".join(random.choice(letters) for _ in range(stringlength))
+def passwordGenerator(username):
+    hashedEmail = hashlib.md5(str(username).encode("utf-8")).hexdigest()
+    return hashedEmail
 
 
 def send_welcome_email(username, email, key):

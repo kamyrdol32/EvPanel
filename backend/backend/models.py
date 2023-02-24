@@ -14,7 +14,7 @@ class Users(db.Model):
     password = db.Column(db.String(128), nullable=False)
     role = db.relationship("Roles", backref="Users", lazy=True)
     avatar = db.Column(db.Text(10000000), unique=False, nullable=True)
-    key = db.Column(db.String(16), nullable=False, default=passwordGenerator())
+    key = db.Column(db.String(32), nullable=False)
     is_active = db.Column(db.Boolean(), default=False, nullable=False)
     created_data = db.Column(db.DateTime, default=datetime.utcnow)
 
