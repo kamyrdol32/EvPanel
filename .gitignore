@@ -26,3 +26,5 @@
 # Backend
 /backend2/venv
 /backend/backend/.env
+!/frontend/src/CSS/output.css
+!/frontend/src/Others/i18n.jsx
