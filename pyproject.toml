@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "EvPanel"
+name = "evpanel"
 version = "0.1.0"
 description = ""
 authors = ["kamyrdol32 <kamyrdol32@gmail.com>"]
@@ -17,8 +17,6 @@ bcrypt = "^4.0.1"
 python-dotenv = "^0.21.1"
 flask-wtf = "^1.1.1"
 mysql = "^0.0.3"
-
-
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"

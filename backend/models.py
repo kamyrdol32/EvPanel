@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from app import db
-from app import app
+from app import app, db
 
 from others import passwordGenerator
 
