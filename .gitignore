@@ -21,7 +21,7 @@
 /frontend/*.njsproj
 /frontend/*.sln
 /frontend/*.sw?
-/frontend/!/src/Others/i18n.jsx
+/frontend/src/Others/i18n.jsx
 
 # Backend
 /backend2/venv
