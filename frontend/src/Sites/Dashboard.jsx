@@ -9,7 +9,6 @@ export default function Dashboard() {
     {name: 'Lista użytkowników', component: users()},
     {name: 'Lista serwerów', component: 'servers'},
     {name: 'Lista usług', component: 'services'},
-    {name: 'Lista faktur', component: 'invoices'},
 ]
 
     const [component, setComponent] = useState(users())
