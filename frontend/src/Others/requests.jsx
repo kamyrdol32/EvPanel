@@ -11,13 +11,13 @@ export function getCookie(name) {
 }
 
 
-export function axiosGet(url, tokenRequired) {
+export function axiosGet(url, data) {
 
     let headers = {
         'Content-Type': 'application/json',
     }
 
-    const getData =  axios.get(default_url + url, {headers: headers})
+    const getData =  axios.get(default_url + url, {params: data, headers: headers})
 
     getData
         .then((response) => {

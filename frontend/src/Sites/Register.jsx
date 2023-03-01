@@ -27,7 +27,7 @@ export default function Register() {
             confirmPassword: confirmPassword
         }
 
-        axiosPost("/auth/register", data)
+        axiosPost("/auth/user/register", data)
             .then((response) => {
                 if (response.status === 200) {
                     setUser(response.data.user)
