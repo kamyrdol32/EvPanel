@@ -11,16 +11,16 @@ from flask_jwt_extended import (
     get_jwt,
     jwt_required,
 )
+from flask_openapi3 import APIBlueprint
 
 from app import db
-from api import api_blueprint
 from models import Users
 from others import passwordGenerator, send_welcome_email
 
-auth_blueprint = Blueprint("auth", __name__)
+auth_blueprint = APIBlueprint("auth", __name__, url_prefix="/auth")
 
 
-@auth_blueprint.route("/register", methods=["POST"])
+@auth_blueprint.post("/user/register")
 @cross_origin()
 def register():
     try:
@@ -75,12 +75,12 @@ def register():
         return jsonify({"error": str(error)}), 400
 
 
-@auth_blueprint.route("/login", methods=["POST"])
+@auth_blueprint.get("/user/login")
 @cross_origin()
 def login():
     try:
-        email = request.json.get("email")
-        password = request.json.get("password")
+        email = request.args.get("email")
+        password = request.args.get("password")
 
         if not email or not password:
             return jsonify({"error": "Please fill all fields"}), 400
@@ -121,7 +121,7 @@ def login():
         return jsonify({"error": str(error)}), 400
 
 
-@auth_blueprint.route("/logout", methods=["POST"])
+@auth_blueprint.get("/logout")
 @cross_origin()
 def logout():
     try:
@@ -133,10 +133,12 @@ def logout():
         return jsonify({"error": str(error)}), 400
 
 
-@auth_blueprint.route("/activate/<key>", methods=["GET"])
+@auth_blueprint.get("/activate")
 @cross_origin()
-def activate(key):
+def activate(key=None):
     try:
+        key = request.args.get("KEY")
+
         user = Users.query.filter_by(key=key).first()
 
         if not user:
@@ -153,7 +155,7 @@ def activate(key):
         return jsonify({"error": str(error)}), 400
 
 
-@auth_blueprint.route("/isAuthenticated", methods=["POST"])
+@auth_blueprint.post("/isAuthenticated")
 @cross_origin()
 @jwt_required()
 def isAuthenticated():
@@ -168,7 +170,6 @@ def isAuthenticated():
 
 
 @auth_blueprint.after_request
-@api_blueprint.after_request
 def refresh_expiring_jwts(response):
     try:
         exp_timestamp = get_jwt()["exp"]

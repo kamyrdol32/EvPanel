@@ -1,11 +1,12 @@
-from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
+from flask_openapi3 import OpenAPI, Info
 from flask_sqlalchemy import SQLAlchemy
 
 # App initialization
-app = Flask(__name__)
+info = Info(title="EvPanel API", version="1.0.0")
+app = OpenAPI(__name__, info=info)
 app.config.from_object("config")
 
 jwt = JWTManager(app)
@@ -19,8 +20,7 @@ import api
 import auth
 
 # Registering blueprints
-app.register_blueprint(api.api_blueprint, url_prefix="/api")
-app.register_blueprint(auth.auth_blueprint, url_prefix="/auth")
+app.register_api(auth.auth_blueprint)
 
 with app.app_context():
     db.create_all()

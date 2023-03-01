@@ -1,5 +1,5 @@
 // Imports
-import {axiosPost, getCookie} from "../Others/requests.jsx";
+import {axiosGet, axiosPost, getCookie} from "../Others/requests.jsx";
 import useLocalStorage from "use-local-storage";
 
 // Code
@@ -7,7 +7,7 @@ export default function useAuth() {
     const [user, setUser] = useLocalStorage("user", null)
 
     function removeUser() {
-        axiosPost("/auth/logout", {}, false)
+        axiosGet("/auth/logout")
             .then((response) => {
                 setUser(null)
                 localStorage.removeItem("user")
