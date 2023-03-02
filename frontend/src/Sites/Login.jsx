@@ -22,7 +22,7 @@ export default function Login() {
             password: password,
         }
 
-        axiosGet("/auth/user/login", data)
+        axiosGet("/api/v1/auth/user/login", data)
             .then((response) => {
                 if (response.status === 200) {
                     if (response.data.user) {

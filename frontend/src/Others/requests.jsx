@@ -52,7 +52,7 @@ export function axiosPost(url, data, tokenRequired) {
 
     postData
         .then((response) => {
-            if (url !== "/auth/isAuthenticated") {
+            if (url !== "/api/v1/auth/isAuthenticated") {
                 console.log(response.data)
             }
             if (response.status === 200) {
