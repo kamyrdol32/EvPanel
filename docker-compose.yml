@@ -15,9 +15,9 @@ services:
 
     evpanel-backend:
         build:
-            context: backend2
-            dockerfile: backend/Dockerfile
-        container_name: evpanel-backend2
+            context: ./backend
+            dockerfile: Dockerfile
+        container_name: evpanel-backend
         restart: always
         ports:
             - 5000:5000
