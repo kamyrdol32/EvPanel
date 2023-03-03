@@ -13,9 +13,9 @@ from flask_jwt_extended import (
 )
 from flask_openapi3 import APIBlueprint
 
-from app import db
-from models import Users
-from others import passwordGenerator, send_welcome_email
+from .app import db
+from .models import Users
+from .others import passwordGenerator, send_welcome_email
 
 auth_blueprint = APIBlueprint("auth", __name__, url_prefix="/auth")
 

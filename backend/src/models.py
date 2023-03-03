@@ -1,8 +1,6 @@
 from datetime import datetime
 
-from app import app, db
-
-from others import passwordGenerator
+from .app import app, db
 
 
 class Users(db.Model):

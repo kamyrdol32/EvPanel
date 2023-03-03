@@ -29,4 +29,3 @@ EXPOSE 5000
 
 # Run app
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "__init__:app"]
-
