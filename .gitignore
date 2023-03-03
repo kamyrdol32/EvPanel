@@ -22,9 +22,7 @@
 /frontend/*.sln
 /frontend/*.sw?
 /frontend/src/Others/i18n.jsx
+/frontend/src/CSS/output.css
 
 # Backend
-/backend2/venv
-/backend/backend/.env
-!/frontend/src/CSS/output.css
-!/frontend/src/Others/i18n.jsx
+/backend/src/.env

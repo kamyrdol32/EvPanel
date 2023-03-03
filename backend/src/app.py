@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 # App initialization
 info = Info(title="EvPanel API", version="1.0.0")
 app = OpenAPI(__name__, info=info)
-app.config.from_object("config")
+app.config.from_pyfile("config.py")
 api_blueprint = APIBlueprint("api", __name__, url_prefix="/api/v1")
 
 jwt = JWTManager(app)
@@ -17,10 +17,10 @@ mail = Mail(app)
 CORS(app, supports_credentials=True)
 
 # Importing
-import auth
+from .auth import auth_blueprint
 
 # Registering blueprints
-api_blueprint.register_api(auth.auth_blueprint)
+api_blueprint.register_api(auth_blueprint)
 
 # Register API
 app.register_api(api_blueprint)
