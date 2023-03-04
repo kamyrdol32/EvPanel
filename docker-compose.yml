@@ -11,7 +11,7 @@ services:
         ports:
             - 3000:3000
         networks:
-            - bridge
+            - evpanel_default
 
     evpanel-backend:
         build:
@@ -22,7 +22,8 @@ services:
         ports:
             - 5000:5000
         networks:
-            - bridge
+            - evpanel_default
 
 networks:
-    bridge:
+    evpanel_default:
+        external: true
