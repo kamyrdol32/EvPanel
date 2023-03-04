@@ -12,7 +12,7 @@ ENV FLASK_RUN_PORT=5001
 ENV POETRY_VERSION=1.4.0
 
 # System deps:
-RUN pip install "poetry==$POETRY_VERSION"
+RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
 # Copy only requirements to cache them in docker layer
 COPY poetry.lock pyproject.toml ./

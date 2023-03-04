@@ -11,7 +11,7 @@ services:
         ports:
             - 3000:3000
         networks:
-            - default
+            - nginx_network
 
     evpanel-backend:
         build:
@@ -22,4 +22,8 @@ services:
         ports:
             - 5000:5000
         networks:
-            - default
+            - nginx_network
+
+networks:
+    nginx_network:
+        external: true
