@@ -12,8 +12,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Test
-      run: echo TEST ${{secrets.HOST }}
     - name: Deploy code
       uses: appleboy/ssh-action@master
       with:
