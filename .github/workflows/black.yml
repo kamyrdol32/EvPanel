@@ -23,4 +23,4 @@ jobs:
         uses: psf/black@stable
         with:
           version: ${{ env.BLACK_VERSION }}
-          src: "./src"
+          src: "./backend"
