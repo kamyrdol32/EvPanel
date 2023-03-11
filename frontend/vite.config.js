@@ -10,7 +10,7 @@ export default defineConfig({
         },
         host: true, // needed for the Docker Container port mapping to work
         strictPort: true,
-        port: 3000, // you can replace this port with any port
+        port: 3001, // you can replace this port with any port
         proxy: {
             '/auth': {
                 target: 'http://evpanel-backend:5000',

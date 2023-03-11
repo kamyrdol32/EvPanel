@@ -25,7 +25,7 @@ RUN poetry config virtualenvs.create false \
 COPY . .
 
 # Expose port
-EXPOSE 5000
+EXPOSE 5001
 
 # Run app
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "src.__init__:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5001", "src.__init__:app"]
