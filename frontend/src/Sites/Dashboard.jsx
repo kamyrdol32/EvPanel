@@ -6,11 +6,7 @@ import {useState} from "react";
 export default function Dashboard() {
 
     const dashboard = [
-    {name: 'Lista użytkowników', component: users()},
-    {name: 'Lista serwerów', component: 'servers'},
-    {name: 'Lista usług', component: 'services'},
-    {name: 'Lista faktur', component: 'invoices'},
-    {name: 'Lista faktur', component: 'invoices'},
+    {name: 'Lista użytkowników', component: users()}
 ]
 
     const [component, setComponent] = useState(users())
@@ -35,7 +31,7 @@ export default function Dashboard() {
                     <div>
                         <img
                             className="w-36 object-cover rounded-full"
-                            src="src/Images/evgaming.png"
+                            src="src/Assets/evgaming.png"
                             alt="EvPanel"
                         />
                     </div>
@@ -63,7 +59,7 @@ export default function Dashboard() {
                 </div>
 
             </div>
-            <div className="w-4/5 min-h-screen">
+            <div className="w-4/5 min-h-screen p-5">
                 {component}
             </div>
         </div>

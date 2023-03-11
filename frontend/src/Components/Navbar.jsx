@@ -25,8 +25,8 @@ const navigation = [
 ]
 
 export const languages = [
-    {name: 'Polish', value: 'pl', Image: "/src/Images/Flags/PL.jpg"},
-    {name: 'English', value: 'en', Image: "/src/Images/Flags/ENG.jpg"},
+    {name: 'Polish', value: 'pl', Image: "/src/Assets/Flags/PL.jpg"},
+    {name: 'English', value: 'en', Image: "/src/Assets/Flags/ENG.jpg"},
 ]
 
 export default function Navbar() {

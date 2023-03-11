@@ -25,4 +25,4 @@
 /frontend/.env
 
 # Backend
-/backend/src/.env
+/backend/.env
