@@ -101,7 +101,7 @@ def login():
         password_hashed = password_hashed.encode("utf-8")
         password_hashed = bcrypt.hashpw(password_hashed, salt)
 
-        if bcrypt.checkpw(user.password.encode("utf-8"), password_hashed):
+        if user.password != str(password_hashed):
             return jsonify({"error": "Invalid password"}), 400
 
         # Create the tokens we will be sending back to the user
