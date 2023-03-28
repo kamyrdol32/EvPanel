@@ -1,13 +1,23 @@
 // Imports
-
+import {useContext} from "react";
+import {authContext} from "../App.jsx";
 
 // Code
 export default function Home() {
 
+    const {isUser} = useContext(authContext)
 
     return (
-        <div>
-            fgddfgfd
-        </div>
+        <>
+            {isUser() ? (
+                <div>
+                    fgddfgfd
+                </div>
+            ) : (
+                <div>
+                    <h1>Please login to see this page</h1>
+                </div>
+            )}
+        </>
     )
 }
