@@ -1,6 +1,5 @@
 from datetime import datetime, timezone, timedelta
 
-import bcrypt
 from flask import jsonify, request
 from flask_cors import cross_origin
 from flask_jwt_extended import (
@@ -13,7 +12,7 @@ from flask_jwt_extended import (
 )
 from flask_openapi3 import APIBlueprint
 
-from .app import db
+from .app import db, bcrypt
 from .models import Users
 from .others import passwordGenerator, send_welcome_email
 
@@ -48,12 +47,10 @@ def register():
             return jsonify({"error": "Username already exists"}), 400
 
         # Hashing password
-        salt = bcrypt.gensalt()
         key = passwordGenerator(username)
 
         password_hashed = password + key
-        password_hashed = password_hashed.encode("utf-8")
-        password_hashed = bcrypt.hashpw(password_hashed, salt)
+        password_hashed = bcrypt.generate_password_hash(password_hashed).decode("utf-8")
 
         user = Users(
             email=email, username=username, password=str(password_hashed), key=key
@@ -94,14 +91,10 @@ def login():
             return jsonify({"error": "User is not active"}), 400
 
         # Hashing password
-        salt = bcrypt.gensalt()
         key = user.key
-
         password_hashed = password + key
-        password_hashed = password_hashed.encode("utf-8")
-        password_hashed = bcrypt.hashpw(password_hashed, salt)
 
-        if user.password != str(password_hashed):
+        if not bcrypt.check_password_hash(user.password, password_hashed):
             return jsonify({"error": "Invalid password"}), 400
 
         # Create the tokens we will be sending back to the user

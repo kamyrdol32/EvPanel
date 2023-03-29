@@ -1,3 +1,4 @@
+from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
@@ -15,6 +16,7 @@ db = SQLAlchemy()
 db.init_app(app)
 mail = Mail(app)
 CORS(app, supports_credentials=True)
+bcrypt = Bcrypt(app)
 
 # Importing
 from .auth import auth_blueprint
