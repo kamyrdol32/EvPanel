@@ -38,3 +38,19 @@ class Roles(db.Model):
 
     def __repr__(self):
         return "<Role %r>" % self.Name
+
+
+class Jobs(db.Model):
+    __tablename__ = "Jobs"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), unique=True, nullable=False)
+    company = db.Column(db.String(128), unique=False, nullable=False)
+    url = db.Column(db.String(128), unique=False, nullable=False)
+
+    def __init__(self, name, company, url):
+        self.name = name
+        self.company = company
+        self.url = url
+
+    def __repr__(self):
+        return "<Jobs %r>" % self.Name
