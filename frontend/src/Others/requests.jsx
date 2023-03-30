@@ -73,3 +73,33 @@ export function axiosPost(url, data, tokenRequired) {
 
     return postData
 }
+
+export function axiosDelete(url, data, tokenRequired) {
+
+    let headers = {
+        'Content-Type': 'application/json',
+    }
+
+    if (tokenRequired) {
+        headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': getCookie('csrf_access_token'),
+        }
+    }
+
+    const deleteData = axios.delete(default_url + url, {params: data, headers: headers})
+
+    deleteData
+        .then((response) => {
+            console.log(response.data)
+            if (response.status === 200) {
+                toast.success(response.data.message)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            toast.error(error.response.data.error)
+        })
+
+    return deleteData
+}

@@ -15,13 +15,11 @@ import {NavLink} from "react-router-dom";
 import {authContext} from "../App.jsx";
 import {useQuery} from "@tanstack/react-query";
 import {useTranslation} from 'react-i18next';
-import Loader from "./Loading";
 
 
 // Code
 const navigation = [
     {name: 'EvPanel', href: '/'},
-    {name: 'discord_dashboard', href: '/dashboard'},
     {name: 'jobs', href: '/jobs'},
 ]
 

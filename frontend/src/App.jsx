@@ -9,7 +9,6 @@ import Register from "./Sites/Register";
 import Logout from "./Sites/Logout";
 import Activate from "./Sites/Activate";
 import Home from "./Sites/Home";
-import Discord from "./Sites/Discord.jsx";
 
 
 // Imports
@@ -39,11 +38,6 @@ function App() {
                         <Navbar/>
                         <Routes>
                             <Route path="/" element={<Home/>}/>
-                            <Route path="/dashboard" element={
-                                <Protected isSignedIn={fetchAuthorization()}>
-                                    <Discord/>
-                                </Protected>
-                            }/>
                             <Route path="/jobs" element={
                                 <Protected isSignedIn={fetchAuthorization()}>
                                     <Jobs/>
