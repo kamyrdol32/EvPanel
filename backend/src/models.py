@@ -55,6 +55,5 @@ class Jobs(db.Model):
         self.url = url
         self.user_id = user_id
 
-
     def __repr__(self):
         return "<Jobs %r>" % self.Name
