@@ -20,15 +20,14 @@ bcrypt = Bcrypt(app)
 
 # Importing
 from .auth import auth_blueprint
+from .job import job_blueprint
 
 # Registering blueprints
 api_blueprint.register_api(auth_blueprint)
+api_blueprint.register_api(job_blueprint)
 
 # Register API
 app.register_api(api_blueprint)
 
 with app.app_context():
     db.create_all()
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)

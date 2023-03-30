@@ -9,7 +9,7 @@ import Register from "./Sites/Register";
 import Logout from "./Sites/Logout";
 import Activate from "./Sites/Activate";
 import Home from "./Sites/Home";
-import Dashboard from "./Sites/Dashboard";
+import Discord from "./Sites/Discord.jsx";
 
 
 // Imports
@@ -19,6 +19,7 @@ import {ToastContainer} from "react-toastify";
 import useAuth from "./Contexts/Auth.jsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import Protected from "./Others/Protected.jsx";
+import Jobs from "./Sites/Jobs.jsx";
 
 
 // Code
@@ -40,7 +41,12 @@ function App() {
                             <Route path="/" element={<Home/>}/>
                             <Route path="/dashboard" element={
                                 <Protected isSignedIn={fetchAuthorization()}>
-                                    <Dashboard/>
+                                    <Discord/>
+                                </Protected>
+                            }/>
+                            <Route path="/jobs" element={
+                                <Protected isSignedIn={fetchAuthorization()}>
+                                    <Jobs/>
                                 </Protected>
                             }/>
                             <Route path="/register" element={<Register/>}/>

@@ -21,7 +21,8 @@ import Loader from "./Loading";
 // Code
 const navigation = [
     {name: 'EvPanel', href: '/'},
-    {name: 'dashboard', href: '/dashboard'},
+    {name: 'discord_dashboard', href: '/dashboard'},
+    {name: 'jobs', href: '/jobs'},
 ]
 
 export const languages = [

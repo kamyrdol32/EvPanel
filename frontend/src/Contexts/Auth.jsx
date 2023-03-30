@@ -7,7 +7,7 @@ export default function useAuth() {
     const [user, setUser] = useLocalStorage("user", null)
 
     function removeUser() {
-        axiosGet("/api/v1/auth/logout")
+        axiosGet("/api/v1/auth/logout", {}, false)
             .then((response) => {
                 setUser(null)
                 localStorage.removeItem("user")

@@ -43,14 +43,18 @@ class Roles(db.Model):
 class Jobs(db.Model):
     __tablename__ = "Jobs"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
+    name = db.Column(db.String(128), unique=False, nullable=False)
     company = db.Column(db.String(128), unique=False, nullable=False)
     url = db.Column(db.String(128), unique=False, nullable=False)
+    created_data = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, name, company, url):
+    def __init__(self, name, company, url, user_id):
         self.name = name
         self.company = company
         self.url = url
+        self.user_id = user_id
+
 
     def __repr__(self):
         return "<Jobs %r>" % self.Name

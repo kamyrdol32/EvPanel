@@ -3,7 +3,7 @@ import {useState} from "react";
 
 
 // Code
-export default function Dashboard() {
+export default function Discord() {
 
     const dashboard = [
     {name: 'Lista użytkowników', component: users()}

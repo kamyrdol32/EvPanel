@@ -11,10 +11,17 @@ export function getCookie(name) {
 }
 
 
-export function axiosGet(url, data) {
+export function axiosGet(url, data, tokenRequired) {
 
     let headers = {
         'Content-Type': 'application/json',
+    }
+
+    if (tokenRequired) {
+        headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': getCookie('csrf_access_token'),
+        }
     }
 
     const getData =  axios.get(default_url + url, {params: data, headers: headers})
