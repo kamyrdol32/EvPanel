@@ -19,8 +19,8 @@ CORS(app, supports_credentials=True)
 bcrypt = Bcrypt(app)
 
 # Importing
-from backend.src.API.auth import auth_blueprint
-from backend.src.API.job import job_blueprint
+from .API.auth import auth_blueprint
+from .API.job import job_blueprint
 
 # Registering blueprints
 api_blueprint.register_api(auth_blueprint)
