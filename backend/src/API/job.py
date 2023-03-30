@@ -20,12 +20,17 @@ job_blueprint = APIBlueprint("job", __name__, url_prefix="/job")
 def get_jobs():
     try:
         if request.args.get("search"):
-
             search = request.args.get("search")
 
             user = get_jwt_identity()
             user_id = Users.query.filter_by(username=user).first().id
-            jobs = Jobs.query.filter_by(user_id=user_id).filter(Jobs.name.like(f"%{search}%")|Jobs.company.like(f"%{search}%")).all()
+            jobs = (
+                Jobs.query.filter_by(user_id=user_id)
+                .filter(
+                    Jobs.name.like(f"%{search}%") | Jobs.company.like(f"%{search}%")
+                )
+                .all()
+            )
 
             Data = []
             for job in jobs:
@@ -39,13 +44,9 @@ def get_jobs():
                     }
                 )
 
-
-
             return jsonify(Data), 200
 
-
         else:
-
             user = get_jwt_identity()
             user_id = Users.query.filter_by(username=user).first().id
             jobs = Jobs.query.filter_by(user_id=user_id).all()
@@ -99,7 +100,6 @@ def add_jobs():
 def delete_jobs():
     try:
         if request.args.get("id"):
-
             user = get_jwt_identity()
             user_id = Users.query.filter_by(username=user).first().id
 
@@ -111,7 +111,6 @@ def delete_jobs():
                 db.session.commit()
 
                 return jsonify({"message": "Job deleted successfully"}), 200
-
 
     except Exception as error:
         return jsonify({"error": str(error)}), 400
