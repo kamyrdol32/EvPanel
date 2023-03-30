@@ -19,7 +19,15 @@ export default defineConfig({
             '/api': {
                 target: 'http://evpanel-backend:5001',
                 changeOrigin: true,
-            }
+            },
+            // '/auth': {
+            //     target: 'http://0.0.0.0:5001',
+            //     changeOrigin: true,
+            // },
+            // '/api': {
+            //     target: 'http://0.0.0.0:5001',
+            //     changeOrigin: true,
+            // }
         }
     }
 })

@@ -18,7 +18,7 @@ export default function Activate() {
             KEY: KEY
         }
 
-        return axiosGet("/api/v1/auth/activate", data)
+        return axiosGet("/api/v1/auth/activate", data, false)
     }
 
     if (status === "success") {

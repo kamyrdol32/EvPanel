@@ -10,12 +10,12 @@ export default function Home() {
     return (
         <>
             {isUser() ? (
-                <div>
-                    fgddfgfdgfdg
+                <div className="flex flex-col items-center justify-center space-y-4 m-3">
+                    <h1 className="font-bold text-xl p-5">Some content</h1>
                 </div>
             ) : (
-                <div>
-                    <h1>Please login to see this page</h1>
+                <div className="flex flex-col items-center justify-center space-y-4 m-3">
+                    <h1 className="font-bold text-xl p-5">Please login to see this page</h1>
                 </div>
             )}
         </>
