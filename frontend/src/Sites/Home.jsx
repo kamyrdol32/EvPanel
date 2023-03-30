@@ -1,11 +1,19 @@
 // Imports
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {authContext} from "../App.jsx";
+import {toast} from "react-toastify";
 
 // Code
 export default function Home() {
 
     const {isUser} = useContext(authContext)
+
+    useEffect(() => {
+        if (!isUser()) {
+            toast.info("Demo account:")
+            toast.info("admin/123456")
+        }
+    })
 
     return (
         <>
