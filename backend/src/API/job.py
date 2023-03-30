@@ -8,6 +8,7 @@ from ..models import Jobs, Users
 
 job_blueprint = APIBlueprint("job", __name__, url_prefix="/job")
 
+
 @job_blueprint.get("/get")
 @cross_origin()
 @jwt_required()
