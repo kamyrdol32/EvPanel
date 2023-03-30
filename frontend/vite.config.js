@@ -28,6 +28,11 @@ export default defineConfig({
             //     target: 'http://0.0.0.0:5001',
             //     changeOrigin: true,
             // }
+        },
+        hmr: {
+            host: 'evpanel.kamilzeglen.pl',
+            port: 3000,
+            protocol: 'wss',
         }
     }
 })
