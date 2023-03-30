@@ -12,9 +12,9 @@ from flask_jwt_extended import (
 )
 from flask_openapi3 import APIBlueprint
 
-from backend.src.app import db, bcrypt
-from backend.src.models import Users
-from backend.src.others import passwordGenerator, send_welcome_email
+from ..app import db, bcrypt
+from ..models import Users
+from ..others import passwordGenerator, send_welcome_email
 
 auth_blueprint = APIBlueprint("auth", __name__, url_prefix="/auth")
 
