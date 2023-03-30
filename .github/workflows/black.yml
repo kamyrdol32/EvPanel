@@ -2,10 +2,7 @@ name: Black
 on: 
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
+      - dev
 
 permissions: read-all
 
