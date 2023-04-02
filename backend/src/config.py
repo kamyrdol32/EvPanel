@@ -10,7 +10,7 @@ PROJECT_AUTHOR = "Kamil Żegleń"
 # Flask
 TESTING = True
 DEBUG = True
-FLASK_ENV = "development"
+FLASK_DEBUG = 1
 SECRET_KEY = os.getenv("SECRET_KEY")
 JSON_SORT_KEYS = False
 
