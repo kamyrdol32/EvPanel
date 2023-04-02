@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
 
 # Load environment variables
-load_dotenv(dotenv_path=find_dotenv())
+load_dotenv(dotenv_path=".env", verbose=True)
 
 # App initialization
 info = Info(title="EvPanel API", version="1.0.0")
