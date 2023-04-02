@@ -1,6 +1,6 @@
 // Imports
 import {useContext, useState} from "react";
-import {axiosPost} from "../Others/requests.jsx";
+import {axiosGet, axiosPost} from "../Others/requests.jsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import {authContext} from "../App.jsx";
 import {useTranslation} from "react-i18next";
@@ -22,7 +22,7 @@ export default function Login() {
             password: password,
         }
 
-        axiosPost("/auth/login", data)
+        axiosGet("/api/v1/auth/user/login", data, false)
             .then((response) => {
                 if (response.status === 200) {
                     if (response.data.user) {
@@ -125,7 +125,6 @@ export default function Login() {
                                 text-gray-800  bg-white
                                 dark:text-white dark:bg-gray-800
                                 "
-                                onClick={fetchLogin}
                             >
                                 {t("sign_up")}
                             </button>

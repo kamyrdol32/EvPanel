@@ -1,5 +1,5 @@
 // Imports
-import {axiosPost, getCookie} from "../Others/requests.jsx";
+import {axiosGet, axiosPost, getCookie} from "../Others/requests.jsx";
 import useLocalStorage from "use-local-storage";
 
 // Code
@@ -7,7 +7,7 @@ export default function useAuth() {
     const [user, setUser] = useLocalStorage("user", null)
 
     function removeUser() {
-        axiosPost("/auth/logout", {}, false)
+        axiosGet("/api/v1/auth/logout", {}, false)
             .then((response) => {
                 setUser(null)
                 localStorage.removeItem("user")
@@ -37,7 +37,7 @@ export default function useAuth() {
 
     function fetchAuthorization() {
         if (getCookie('csrf_access_token')) {
-            const data = axiosPost("/auth/isAuthenticated", {}, true)
+            const data = axiosPost("/api/v1/auth/isAuthenticated", {}, true)
 
             data.then((response) => {
                     setUser(response.data.user)

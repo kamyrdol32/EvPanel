@@ -9,7 +9,6 @@ import Register from "./Sites/Register";
 import Logout from "./Sites/Logout";
 import Activate from "./Sites/Activate";
 import Home from "./Sites/Home";
-import Dashboard from "./Sites/Dashboard";
 
 
 // Imports
@@ -19,6 +18,7 @@ import {ToastContainer} from "react-toastify";
 import useAuth from "./Contexts/Auth.jsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import Protected from "./Others/Protected.jsx";
+import Jobs from "./Sites/Jobs.jsx";
 
 
 // Code
@@ -38,9 +38,9 @@ function App() {
                         <Navbar/>
                         <Routes>
                             <Route path="/" element={<Home/>}/>
-                            <Route path="/dashboard" element={
+                            <Route path="/jobs" element={
                                 <Protected isSignedIn={fetchAuthorization()}>
-                                    <Dashboard/>
+                                    <Jobs/>
                                 </Protected>
                             }/>
                             <Route path="/register" element={<Register/>}/>

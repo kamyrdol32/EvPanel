@@ -1,9 +1,9 @@
 import hashlib
 import random
 
-
 from flask_mail import Message
-from app import mail
+
+from .app import mail
 
 
 def passwordGenerator(username):
@@ -18,10 +18,7 @@ def send_welcome_email(username, email, key):
         + str(username)
         + "!\n\n"
         + "Aby potwierdzić rejestrację kliknij w poniższy link:\n\n"
-        + "http://evpanel.pl/activate/"
-        + str(key)
-        + "\n"
-        + "http://87.207.92.40:3000/activate/"
+        + "https://evpanel.kamilzeglen.pl/activate/"
         + str(key)
         + "\n\n"
         + "Pozdrawiamy,\n"

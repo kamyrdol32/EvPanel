@@ -11,13 +11,20 @@ export function getCookie(name) {
 }
 
 
-export function axiosGet(url, tokenRequired) {
+export function axiosGet(url, data, tokenRequired) {
 
     let headers = {
         'Content-Type': 'application/json',
     }
 
-    const getData =  axios.get(default_url + url, {headers: headers})
+    if (tokenRequired) {
+        headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': getCookie('csrf_access_token'),
+        }
+    }
+
+    const getData =  axios.get(default_url + url, {params: data, headers: headers})
 
     getData
         .then((response) => {
@@ -52,7 +59,7 @@ export function axiosPost(url, data, tokenRequired) {
 
     postData
         .then((response) => {
-            if (url !== "/auth/isAuthenticated") {
+            if (url !== "/api/v1/auth/isAuthenticated") {
                 console.log(response.data)
             }
             if (response.status === 200) {
@@ -65,4 +72,34 @@ export function axiosPost(url, data, tokenRequired) {
         })
 
     return postData
+}
+
+export function axiosDelete(url, data, tokenRequired) {
+
+    let headers = {
+        'Content-Type': 'application/json',
+    }
+
+    if (tokenRequired) {
+        headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': getCookie('csrf_access_token'),
+        }
+    }
+
+    const deleteData = axios.delete(default_url + url, {params: data, headers: headers})
+
+    deleteData
+        .then((response) => {
+            console.log(response.data)
+            if (response.status === 200) {
+                toast.success(response.data.message)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+            toast.error(error.response.data.error)
+        })
+
+    return deleteData
 }

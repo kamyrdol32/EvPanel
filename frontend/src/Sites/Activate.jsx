@@ -13,7 +13,12 @@ export default function Activate() {
     const {status, isLoading} = useQuery(['Activate'], fetchActivate, {refetchOnWindowFocus: false, retry: false})
 
     function fetchActivate() {
-        return axiosGet("/auth/activate/" + KEY)
+
+        const data = {
+            KEY: KEY
+        }
+
+        return axiosGet("/api/v1/auth/activate", data, false)
     }
 
     if (status === "success") {

@@ -9,19 +9,23 @@ ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=development
 ENV FLASK_DEBUG=1
 ENV FLASK_RUN_PORT=5001
+ENV POETRY_VERSION=1.4.0
 
-# Copy requirements.txt
-COPY requirements.txt .
+# System deps:
+RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
-# Install app dependencies
-RUN pip install -r requirements.txt
+# Copy only requirements to cache them in docker layer
+COPY poetry.lock pyproject.toml ./
 
-# Copy app source code
-COPY ../../backend2 .
+# Project initialization:
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-dev
 
-# Expose port 3000
-EXPOSE 5000
+# Copy project
+COPY . .
+
+# Expose port
+EXPOSE 5001
 
 # Run app
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "core:app"]
-
+CMD ["gunicorn", "--bind", "0.0.0.0:5001", "src.__init__:app"]

@@ -9,17 +9,13 @@ services:
         container_name: evpanel-frontend
         restart: always
         ports:
-            - 3000:3000
-        networks:
-            - default
+            - 3001:3001
 
     evpanel-backend:
         build:
-            context: backend2
-            dockerfile: backend/Dockerfile
-        container_name: evpanel-backend2
+            context: ./backend
+            dockerfile: Dockerfile
+        container_name: evpanel-backend
         restart: always
         ports:
-            - 5000:5000
-        networks:
-            - default
+            - 5001:5001
