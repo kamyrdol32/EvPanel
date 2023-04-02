@@ -4,6 +4,10 @@ from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from flask_openapi3 import OpenAPI, Info, APIBlueprint
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # App initialization
 info = Info(title="EvPanel API", version="1.0.0")
