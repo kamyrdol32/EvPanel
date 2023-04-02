@@ -4,7 +4,7 @@ FROM python:3.11-alpine
 WORKDIR /backend
 
 # System deps:
-RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
+RUN pip install --no-cache-dir "poetry"
 
 # Copy only requirements to cache them in docker layer
 COPY poetry.lock pyproject.toml ./
