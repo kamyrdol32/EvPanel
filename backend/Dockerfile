@@ -11,6 +11,9 @@ ENV FLASK_DEBUG=1
 ENV FLASK_RUN_PORT=5001
 ENV POETRY_VERSION=1.4.0
 
+# Load ENV variables from .env file
+RUN set -a && . .env && set +a
+
 # System deps:
 RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
