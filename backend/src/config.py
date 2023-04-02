@@ -1,8 +1,5 @@
 from datetime import timedelta
-from dotenv import load_dotenv
 import os
-
-load_dotenv()
 
 # Project
 PROJECT_NAME = "EvPanel"
