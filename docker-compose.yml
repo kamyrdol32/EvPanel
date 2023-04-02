@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
     evpanel-frontend:
         build:
             context: ./frontend
@@ -19,7 +18,7 @@ services:
             dockerfile: Dockerfile
         container_name: evpanel-backend
         env_file:
-            -   backend.env
+            - ./backend/backend.env
         restart: always
         ports:
             - 5001:5001
