@@ -7,7 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: black
+    needs: ./github/workflows/CI.yml
     environment: deploy
     steps:
       - name: Checkout code
