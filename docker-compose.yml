@@ -7,7 +7,7 @@ services:
             dockerfile: Dockerfile
         container_name: evpanel-frontend
         env_file:
-            - ./frontend.env
+            - ./frontend..env
         restart: always
         ports:
             - 3001:3001
@@ -18,7 +18,7 @@ services:
             dockerfile: Dockerfile
         container_name: evpanel-backend
         env_file:
-            - ./backend.env
+            - ./backend..env
         restart: always
         ports:
             - 5001:5001
