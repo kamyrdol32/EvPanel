@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 # App initialization
 info = Info(title="EvPanel API", version="1.0.0")
 app = OpenAPI(__name__, info=info)
+app.config.from_pyfile("config.py")
 api_blueprint = APIBlueprint("api", __name__, url_prefix="/api/v1")
 
 jwt = JWTManager(app)
