@@ -21,18 +21,4 @@ jobs:
             cd Projects/evpanel/
             git pull origin master
             docker compose up -d --build
-
-  nginx_reload:
-    runs-on: ubuntu-latest
-    environment: deploy
-    needs: deploy
-    steps:
-      - name: Reload nginx
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: |
             docker restart nginx_proxy
