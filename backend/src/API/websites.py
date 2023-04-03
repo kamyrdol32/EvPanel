@@ -50,8 +50,3 @@ def check_websites():
 
             print(error)
             return jsonify({"error": str(error)}), 400
-
-
-while True:
-    check_websites()
-    time.sleep(60)
