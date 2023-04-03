@@ -21,10 +21,12 @@ bcrypt = Bcrypt(app)
 # Importing
 from .API.auth import auth_blueprint
 from .API.job import job_blueprint
+from .API.websites import websites_blueprint
 
 # Registering blueprints
 api_blueprint.register_api(auth_blueprint)
 api_blueprint.register_api(job_blueprint)
+api_blueprint.register_api(websites_blueprint)
 
 # Register API
 app.register_api(api_blueprint)
