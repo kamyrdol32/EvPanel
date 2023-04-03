@@ -31,7 +31,7 @@ function App() {
     const {setUser, removeUser, isUser, getUser, fetchAuthorization} = useAuth()
 
     return (
-        <div className="min-h-screen dark:bg-gray-600 bg-gray-100 text-gray-900 dark:text-white">
+        <div className="min-h-screen bg-secondary dark:bg-dark_secondary text-gray-900 dark:text-white">
             <QueryClientProvider client={queryClient}>
                 <authContext.Provider value={{setUser, removeUser, isUser, getUser, fetchAuthorization}}>
                     <BrowserRouter>

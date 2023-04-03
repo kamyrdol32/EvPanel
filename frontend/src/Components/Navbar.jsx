@@ -38,14 +38,14 @@ export default function Navbar() {
     useQuery(['Authorization'], fetchAuthorization)
 
     return (
-        <Disclosure as="nav" className="bg-gray-800 border-b border-indigo-300">
+        <Disclosure as="nav" className="bg-primary dark:bg-dark_primary border-accent">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
 
                         {/* Mobile menu button*/}
                         <Disclosure.Button
-                            className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none">
+                            className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none text-white dark:text-white">
                             <span className="sr-only">Open main menu</span>
                             {sidebarOpen ? (
                                 <XMarkIcon onClick={() => setSidebarOpen(!sidebarOpen)} className="block h-6 w-6"
@@ -69,7 +69,7 @@ export default function Navbar() {
                                     <NavLink to={item.href} key={item.name}>
                                         <div
                                             className={
-                                                'text-indigo-300 px-3 py-2 rounded-md text-sm font-bold ' +
+                                                'px-3 py-2 rounded-md text-sm font-bold ' +
                                                 'hover:text-white hover:bg-indigo-900 hover:shadow hover:shadow-indigo-600'
                                             }
                                         >
@@ -111,7 +111,7 @@ export default function Navbar() {
 
             {/* Phone - Menu*/}
             <Disclosure.Panel className="sm:hidden">
-                <div className="space-y-1 px-2 pt-2 pb-3 text-white divide-y divide-indigo-300">
+                <div className="space-y-1 px-2 pt-2 pb-3 divide-y divide-indigo-300">
                     {navigation.map((item) => (
                         <Disclosure.Button
                             key={item.name}
