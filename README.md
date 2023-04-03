@@ -28,10 +28,9 @@ This web application is a personal project aimed at acquiring new programming kn
   - **Docker & Docker Compose**
   
 ### Environment Variables
-To run this project, you will need to add the following environment file on main directory:
+To run this project, you will need to add the following environment file on backend directory:
 
-
-**.env.backend**
+_**.env**_
 ```bash
 SECRET_KEY=""
 SQLALCHEMY_DATABASE_URI=""
@@ -40,7 +39,9 @@ MAIL_USERNAME=""
 MAIL_PASSWORD=""
 ```
 
-**.env.frontend**
+and frontend directory:
+
+**.env**
 ```bash
 VITE_I18NEXUS_API_KEY=""
 ```
