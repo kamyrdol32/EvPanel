@@ -49,7 +49,7 @@ def refresh_websites():
                 website.status = "Unknown"
 
         except Exception as error:
-            website.status = error
+            website.status = "ERROR"
             print(error)
             return False
 
