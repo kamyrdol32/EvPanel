@@ -37,11 +37,11 @@ def refresh_websites():
 
     for website in website:
         try:
-            if website.endpoint == 'localhost':
+            if website.endpoint_backend == 'localhost':
                 website.status = "Online"
                 print("Online " + str(website.name))
-            if website.endpoint:
-                response = requests.get(website.endpoint)
+            if website.endpoint_backend:
+                response = requests.get(website.endpoint_backend)
                 if response.status_code == 200:
                     website.status = "Online"
                     print("Online " + str(website.name))
