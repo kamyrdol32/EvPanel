@@ -27,9 +27,12 @@ services:
         networks:
             - evpanel_default
             - portfolio_old_default
+            - hyped_default
 
 networks:
     evpanel_default:
         external: true
     portfolio_old_default:
+        external: true
+    hyped_default:
         external: true
