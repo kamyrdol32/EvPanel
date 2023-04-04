@@ -25,11 +25,11 @@ services:
         ports:
             - 5001:5001
         networks:
-            - evpanel-network
-            - portfolio_old-network
+            - evpanel_default
+            - portfolio_old_default
 
 networks:
-    evpanel-network:
+    evpanel_default:
         driver: bridge
-    portfolio_old-network:
+    portfolio_old_default:
         external: true
