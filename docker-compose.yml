@@ -10,9 +10,7 @@ services:
             - frontend/.env
         restart: always
         ports:
-            - 3001:3001
-        networks:
-            - evpanel_default
+            - "3001:3001"
 
     evpanel-backend:
         build:
@@ -23,9 +21,8 @@ services:
             - backend/.env
         restart: always
         ports:
-            - 5001:5001
+            - "5001:5001"
         networks:
-            - evpanel_default
             - portfolio_old_default
 
 networks:
