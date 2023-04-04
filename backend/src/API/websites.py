@@ -50,7 +50,7 @@ def refresh_websites():
                 website.status = "Unknown"
 
         except Exception as error:
-            website.status = "ERROR"
+            website.status = error
             print(error)
 
         db.session.add(website)
