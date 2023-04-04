@@ -1,7 +1,6 @@
 // Imports
 import {useContext, useEffect, useState} from "react";
 import {authContext} from "../App.jsx";
-import {toast} from "react-toastify";
 import {HiWifi} from "react-icons/hi";
 import {axiosGet} from "../Others/requests.jsx";
 import {useQuery} from "@tanstack/react-query";
@@ -14,9 +13,6 @@ export default function Home() {
 
     const {isUser} = useContext(authContext)
     const [websites, setWebsites] = useState([])
-
-    toast.info("Demo account:")
-    toast.info("admin/123456")
 
     function fetchWebsites() {
         const data = axiosGet("/api/v1/website/get", {}, true)
