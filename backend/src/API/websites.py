@@ -5,7 +5,7 @@ from flask import jsonify, request
 from flask_cors import cross_origin
 from flask_openapi3 import APIBlueprint
 
-from ..app import db, scheduler
+from ..app import db
 from ..models import Websites
 
 websites_blueprint = APIBlueprint("website", __name__, url_prefix="/website")
@@ -30,8 +30,8 @@ def get_websites():
     return jsonify(Data), 200
 
 
-
-@scheduler.task("interval", id="refresh_websites", seconds=60, misfire_grace_time=900)
+@websites_blueprint.get("/refresh")
+@cross_origin()
 def refresh_websites():
     website = Websites.query.all()
     Data = []
