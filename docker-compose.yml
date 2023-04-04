@@ -22,3 +22,9 @@ services:
         restart: always
         ports:
             - 5001:5001
+        networks:
+            - bridge
+
+networks:
+    bridge:
+        driver: bridge
