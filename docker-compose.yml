@@ -11,6 +11,8 @@ services:
         restart: always
         ports:
             - 3001:3001
+        networks:
+            - evpanel-network
 
     evpanel-backend:
         build:
@@ -22,3 +24,12 @@ services:
         restart: always
         ports:
             - 5001:5001
+        networks:
+            - evpanel-network
+            - portfolio_old-network
+
+networks:
+    evpanel-network:
+        driver: bridge
+    portfolio_old-network:
+        external: true
