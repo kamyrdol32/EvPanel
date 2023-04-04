@@ -49,11 +49,10 @@ def refresh_websites():
                 website.status = "Unknown"
 
         except Exception as error:
-            website.status = "ERROR"
+            website.status = error
             print(error)
-            return False
 
         db.session.add(website)
         db.session.commit()
 
-        return True
+    return True
