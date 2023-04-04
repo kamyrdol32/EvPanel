@@ -1,3 +1,4 @@
+from flask import jsonify
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
@@ -30,6 +31,12 @@ api_blueprint.register_api(websites_blueprint)
 
 # Register API
 app.register_api(api_blueprint)
+
+
+@app.route("/health_check")
+def health_check():
+    return jsonify("OK"), 200
+
 
 with app.app_context():
     db.create_all()
