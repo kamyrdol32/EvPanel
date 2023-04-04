@@ -31,6 +31,7 @@ def get_websites():
 
 
 def refresh_websites():
+    print("Refresing websites")
     website = Websites.query.all()
     Data = []
 
@@ -51,9 +52,8 @@ def refresh_websites():
         except Exception as error:
             website.status = "ERROR"
             print(error)
-            return jsonify({"error": str(error)}), 400
 
         db.session.add(website)
         db.session.commit()
 
-
+    return True
