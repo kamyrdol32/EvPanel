@@ -26,3 +26,7 @@ services:
             - "5001:5001"
         networks:
             - evpanel_default
+
+networks:
+    evpanel_default:
+        external: true
