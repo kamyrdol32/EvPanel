@@ -5,6 +5,7 @@ from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from flask_openapi3 import OpenAPI, Info, APIBlueprint
 from flask_sqlalchemy import SQLAlchemy
+from flask_apscheduler import APScheduler
 
 # App initialization
 info = Info(title="EvPanel API", version="1.0.0")
@@ -12,12 +13,15 @@ app = OpenAPI(__name__, info=info)
 app.config.from_pyfile("config.py")
 api_blueprint = APIBlueprint("api", __name__, url_prefix="/api/v1")
 
+CORS(app, supports_credentials=True)
 jwt = JWTManager(app)
 db = SQLAlchemy()
 db.init_app(app)
 mail = Mail(app)
-CORS(app, supports_credentials=True)
 bcrypt = Bcrypt(app)
+scheduler = APScheduler()
+scheduler.init_app(app)
+scheduler.start()
 
 # Importing
 from .API.auth import auth_blueprint
