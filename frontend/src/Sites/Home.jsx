@@ -4,7 +4,7 @@ import {authContext} from "../App.jsx";
 import {HiWifi} from "react-icons/hi";
 import {axiosGet} from "../Others/requests.jsx";
 import {useQuery} from "@tanstack/react-query";
-import Loader from "../Components/Loading.jsx";
+import Loader from "../Components/Loader.jsx";
 
 // Code
 export default function Home() {
