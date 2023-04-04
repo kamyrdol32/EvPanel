@@ -49,10 +49,11 @@ def refresh_websites():
                 website.status = "Unknown"
 
         except Exception as error:
-            website.status = error
+            website.status = "ERROR"
             print(error)
+            return jsonify({"error": str(error)}), 400
 
         db.session.add(website)
         db.session.commit()
 
-    return True
+
