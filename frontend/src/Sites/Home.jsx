@@ -19,19 +19,9 @@ export default function Home() {
 
         data.then((response) => {
             setWebsites(response.data)
-
-            const interval = setInterval(() => {
-                refreshWebsites()
-            }, 10000)
         })
 
         return data
-    }
-
-    function refreshWebsites() {
-        axiosGet("/api/v1/website/refresh", {}, true).then((response) => {
-            setWebsites(response.data)
-        })
     }
 
     if (isLoading) return <Loader/>
