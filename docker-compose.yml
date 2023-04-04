@@ -32,3 +32,4 @@ networks:
     evpanel_default:
         driver: bridge
     portfolio_old_default:
+        external: true
