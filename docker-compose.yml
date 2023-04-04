@@ -31,3 +31,5 @@ services:
 networks:
     evpanel_default:
         driver: external
+    portfolio_old_default:
+        driver: external
