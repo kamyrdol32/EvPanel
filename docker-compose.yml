@@ -26,7 +26,10 @@ services:
             - "5001:5001"
         networks:
             - evpanel_default
+            - portfolio_old_default
 
 networks:
     evpanel_default:
+        external: true
+    portfolio_old_default:
         external: true
