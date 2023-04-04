@@ -38,8 +38,8 @@ export default function Home() {
                     <div className="flow-root">
                         <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
                             {websites && websites.map((item, index) => (
-                                <div key={item.name}>
-                                    <li className="py-3 sm:py-4">
+                                <div className="py-3 sm:py-4" key={item.name}>
+                                    <li className="">
                                         <div className="flex items-center space-x-4">
                                             {item.status === "Online" ? (
                                                 <HiWifi className="h-5 w-5 text-green-400" aria-hidden="true"/>
@@ -66,7 +66,7 @@ export default function Home() {
 
                                         </div>
                                     </li>
-                                    <li className="py-3 sm:py-4">
+                                    <li className="">
                                         <div className="flex items-center space-x-4">
                                             {item.status === "Online" ? (
                                                 <HiWifi className="h-5 w-5 text-green-400" aria-hidden="true"/>
