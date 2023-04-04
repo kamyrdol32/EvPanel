@@ -27,9 +27,19 @@ export default function Home() {
 
         data.then((response) => {
             setWebsites(response.data)
+
+            const interval = setInterval(() => {
+                refreshWebsites()
+            }, 10000)
         })
 
         return data
+    }
+
+    function refreshWebsites() {
+        axiosGet("/api/v1/website/refresh", {}, true).then((response) => {
+            setWebsites(response.data)
+        })
     }
 
     if (isLoading) return <Loader/>
@@ -58,25 +68,16 @@ export default function Home() {
                                                 <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                                                     {item.name}
                                                 </p>
-                                                <a href={item.url}
-                                                   className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                <a href={item.url} className="text-sm text-gray-500 truncate dark:text-gray-400">
                                                     {item.url}
                                                 </a>
                                             </div>
-                                            {item.status === undefined (
-                                                <div
-                                                    className=" inline-flex items-center text-base font-semibold text-green-600">
-                                                    Undefinde
-                                                </div>
-                                            )}
                                             {item.status === "Online" ? (
-                                                <div
-                                                    className=" inline-flex items-center text-base font-semibold text-green-600">
+                                                <div className=" inline-flex items-center text-base font-semibold text-green-600">
                                                     {item.status}
                                                 </div>
                                             ) : (
-                                                <div
-                                                    className=" inline-flex items-center text-base font-semibold text-red-600">
+                                                <div className=" inline-flex items-center text-base font-semibold text-red-600">
                                                     {item.status}
                                                 </div>
                                             )}
