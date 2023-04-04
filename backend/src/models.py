@@ -65,7 +65,7 @@ class Websites(db.Model):
     name = db.Column(db.String(128), unique=False, nullable=False)
     url = db.Column(db.String(256), unique=False, nullable=False)
     endpoint = db.Column(db.String(256), unique=False, nullable=True)
-    status = db.Column(db.String(128), unique=False, nullable=False)
+    status = db.Column(db.String(512), unique=False, nullable=False)
 
     def __init__(self, name, url, user_id):
         self.name = name
