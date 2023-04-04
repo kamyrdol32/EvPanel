@@ -11,6 +11,8 @@ services:
         restart: always
         ports:
             - "3001:3001"
+        networks:
+            - evpanel_default
 
     evpanel-backend:
         build:
@@ -22,3 +24,5 @@ services:
         restart: always
         ports:
             - "5001:5001"
+        networks:
+            - evpanel_default
