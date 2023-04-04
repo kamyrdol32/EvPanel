@@ -50,8 +50,8 @@ def refresh_websites():
                         website.status = response.status_code
                         print("Offline " + str(website.name))
 
-            else:
-                website.status = "Unknown"
+                else:
+                    website.status = "Unknown"
 
         except Exception as error:
             website.status = error
