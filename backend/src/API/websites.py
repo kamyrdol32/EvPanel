@@ -1,5 +1,4 @@
 import requests
-import threading
 
 from flask import jsonify, request
 from flask_cors import cross_origin
@@ -14,6 +13,7 @@ websites_blueprint = APIBlueprint("website", __name__, url_prefix="/website")
 @websites_blueprint.get("/get")
 @cross_origin()
 def get_websites():
+    refresh_websites()
     websites = Websites.query.all()
     Data = []
 
@@ -30,8 +30,8 @@ def get_websites():
     return jsonify(Data), 200
 
 
-
 def refresh_websites():
+    print("Refresing websites")
     website = Websites.query.all()
     Data = []
 
@@ -65,6 +65,4 @@ def refresh_websites():
                 "status": website.status,
             }
         )
-
-    threading.Timer(15, refresh_websites).start()
 
