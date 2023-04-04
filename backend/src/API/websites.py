@@ -22,10 +22,10 @@ def get_websites():
             if website.endpoint:
                 response = requests.get(website.endpoint)
                 if response.status_code == 200:
-                    website.status = "Online"
+                    website.status = response.status_code
                     print("Online " + str(website.name))
                 else:
-                    website.status = "Offline"
+                    website.status = response.status_code
                     print("Offline " + str(website.name))
             else:
                 website.status = "Unknown"
