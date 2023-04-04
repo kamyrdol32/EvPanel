@@ -28,6 +28,8 @@ def get_websites():
             }
         )
 
+    return jsonify(Data), 200
+
 
     # Data = []
     # websites = Websites.query.all()
