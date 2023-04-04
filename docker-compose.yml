@@ -12,7 +12,7 @@ services:
         ports:
             - 3001:3001
         networks:
-            - evpanel-network
+            - evpanel_default
 
     evpanel-backend:
         build:
