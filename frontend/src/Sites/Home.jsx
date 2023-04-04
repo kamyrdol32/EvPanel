@@ -15,12 +15,8 @@ export default function Home() {
     const {isUser} = useContext(authContext)
     const [websites, setWebsites] = useState([])
 
-    useEffect(() => {
-        if (!isUser()) {
-            toast.info("Demo account:")
-            toast.info("admin/123456")
-        }
-    })
+    toast.info("Demo account:")
+    toast.info("admin/123456")
 
     function fetchWebsites() {
         const data = axiosGet("/api/v1/website/get", {}, true)
