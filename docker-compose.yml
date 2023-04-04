@@ -28,6 +28,7 @@ services:
             - evpanel_default
             - portfolio_old_default
             - hyped_default
+            - sezonowyogrod_default
 
 networks:
     evpanel_default:
@@ -35,4 +36,6 @@ networks:
     portfolio_old_default:
         external: true
     hyped_default:
+        external: true
+    sezonowyogrod_default:
         external: true
