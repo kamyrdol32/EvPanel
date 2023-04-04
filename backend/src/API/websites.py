@@ -14,37 +14,52 @@ websites_blueprint = APIBlueprint("website", __name__, url_prefix="/website")
 @websites_blueprint.get("/get")
 @cross_origin()
 def get_websites():
-    Data = []
+
     websites = Websites.query.all()
+    Data = []
 
     for website in websites:
-        try:
-            if website.endpoint:
-                response = requests.get(website.endpoint)
-                if response.status_code == 200:
-                    website.status = "Online"
-                    print("Online " + str(website.name))
-                else:
-                    website.status = response.status_code
-                    print("Offline " + str(website.name))
-            else:
-                website.status = "Unknown"
-
-        except Exception as error:
-            website.status = "ERROR"
-            print(error)
-            return jsonify({"error": str(error)}), 400
-
-        db.session.add(website)
-        db.session.commit()
-
         Data.append(
             {
                 "id": website.id,
                 "name": website.name,
                 "url": website.url,
-                "status": website.status,
+                "status": False,
             }
         )
 
-    return jsonify(Data), 200
+
+    # Data = []
+    # websites = Websites.query.all()
+    #
+    # for website in websites:
+    #     try:
+    #         if website.endpoint:
+    #             response = requests.get(website.endpoint)
+    #             if response.status_code == 200:
+    #                 website.status = "Online"
+    #                 print("Online " + str(website.name))
+    #             else:
+    #                 website.status = response.status_code
+    #                 print("Offline " + str(website.name))
+    #         else:
+    #             website.status = "Unknown"
+    #
+    #     except Exception as error:
+    #         website.status = "ERROR"
+    #         print(error)
+    #         return jsonify({"error": str(error)}), 400
+    #
+    #     db.session.add(website)
+    #     db.session.commit()
+    #
+    #     Data.append(
+    #         {
+    #             "id": website.id,
+    #             "name": website.name,
+    #             "url": website.url,
+    #             "status": website.status,
+    #         }
+    #     )
+    #
+    # return jsonify(Data), 200
