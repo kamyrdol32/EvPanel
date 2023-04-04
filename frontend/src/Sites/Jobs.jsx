@@ -3,7 +3,7 @@ import {useQuery} from "@tanstack/react-query";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {TrashIcon} from '@heroicons/react/24/outline'
-import Loader from "../Components/Loading.jsx";
+import Loader from "../Components/Loader.jsx";
 
 export default function Jobs() {
 

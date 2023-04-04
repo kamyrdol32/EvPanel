@@ -31,7 +31,6 @@ def get_websites():
 
 
 def refresh_websites():
-    print("Refresing websites")
     website = Websites.query.all()
     Data = []
 
@@ -56,13 +55,3 @@ def refresh_websites():
 
         db.session.add(website)
         db.session.commit()
-
-        Data.append(
-            {
-                "id": website.id,
-                "name": website.name,
-                "url": website.url,
-                "status": website.status,
-            }
-        )
-

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Navigate, useNavigate, useParams} from 'react-router-dom'
 import {axiosGet} from "../Others/requests.jsx";
 import {useQuery} from "@tanstack/react-query";
-import Loader from "../Components/Loading";
+import Loader from "../Components/Loader.jsx";
 
 export default function Activate() {
 
