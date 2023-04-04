@@ -40,14 +40,15 @@ def refresh_websites():
             if website.endpoint_backend == 'localhost':
                 website.status = "Online"
                 print("Online " + str(website.name))
-            if website.endpoint_backend:
-                response = requests.get(website.endpoint_backend)
-                if response.status_code == 200:
-                    website.status = "Online"
-                    print("Online " + str(website.name))
-                else:
-                    website.status = response.status_code
-                    print("Offline " + str(website.name))
+            else:
+                if website.endpoint_backend:
+                    response = requests.get(website.endpoint_backend)
+                    if response.status_code == 200:
+                        website.status = "Online"
+                        print("Online " + str(website.name))
+                    else:
+                        website.status = response.status_code
+                        print("Offline " + str(website.name))
 
             else:
                 website.status = "Unknown"
