@@ -63,10 +63,11 @@ class Websites(db.Model):
     __tablename__ = "Websites"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), unique=False, nullable=False)
-    url = db.Column(db.String(256), unique=False, nullable=False)
+    url = db.Column(db.String(256), unique=False, nullable=True)
     endpoint_backend = db.Column(db.String(256), unique=False, nullable=True)
     endpoint_frontend = db.Column(db.String(256), unique=False, nullable=True)
-    status = db.Column(db.String(512), unique=False, nullable=False)
+    status_backend = db.Column(db.String(512), unique=False, nullable=True)
+    status_frontend = db.Column(db.String(512), unique=False, nullable=True)
 
     def __init__(self, name, url, user_id):
         self.name = name

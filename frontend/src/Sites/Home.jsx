@@ -41,7 +41,7 @@ export default function Home() {
                                 <div key={item.name}>
                                     <li className="py-3 sm:py-4">
                                         <div className="flex items-center space-x-4">
-                                            {item.status === "Online" ? (
+                                            {item.status_backend === "Online" && item.status_frontend === "Online" ? (
                                                 <HiWifi className="h-5 w-5 text-green-400" aria-hidden="true"/>
                                             ) : (
                                                 <HiWifi className="h-5 w-5 text-red-400" aria-hidden="true"/>
@@ -50,19 +50,14 @@ export default function Home() {
                                                 <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                                                     {item.name}
                                                 </p>
-                                                <a href={item.url} className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                <a href={item.url}
+                                                   className="text-sm text-gray-500 truncate dark:text-gray-400">
                                                     {item.url}
                                                 </a>
                                             </div>
-                                            {item.status === "Online" ? (
-                                                <div className=" inline-flex items-center text-base font-semibold text-green-600">
-                                                    {item.status} | {item.status}
-                                                </div>
-                                            ) : (
-                                                <div className=" inline-flex items-center text-base font-semibold text-red-600">
-                                                    {item.status}
-                                                </div>
-                                            )}
+                                            <div className=" inline-flex items-center text-base font-semibold">
+                                                {item.status_backend} | {item.status_frontend}
+                                            </div>
 
                                         </div>
                                     </li>
