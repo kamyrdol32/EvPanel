@@ -48,6 +48,8 @@ def refresh_websites():
                     website.status_backend = "Online"
                 else:
                     website.status_backend = "Offline"
+            elif website.endpoint_backend == "localhost":
+                website.status_backend = "Online"
             else:
                 website.status_backend = "Unknown"
 
