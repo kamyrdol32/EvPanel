@@ -12,7 +12,7 @@ export default function Home() {
     const {isUser} = useContext(authContext)
     const [websites, setWebsites] = useState([])
 
-    const {isLoading} =  useQuery(['WebsitesRefresh'], fetchWebsitesRefresh)
+    useQuery(['WebsitesRefresh'], fetchWebsitesRefresh)
 
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function Home() {
 
 
     function fetchWebsites() {
-        const data = axiosGet("/api/v1/website/get", {}, true)
+        const data = axiosGet("/api/v1/website/get", {}, false)
 
         data.then((response) => {
             setWebsites(response.data)
@@ -32,7 +32,7 @@ export default function Home() {
 
     function fetchWebsitesRefresh() {
         if (websites.length !== 0) {
-            const data = axiosGet("/api/v1/website/refresh", {}, true)
+            const data = axiosGet("/api/v1/website/refresh", {}, false)
 
             data.then((response) => {
                 setWebsites(response.data)
@@ -41,9 +41,6 @@ export default function Home() {
             return data
         }
     }
-
-
-    if (isLoading) return <Loader/>
 
     return (
         <>
