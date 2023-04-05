@@ -13,7 +13,6 @@ websites_blueprint = APIBlueprint("website", __name__, url_prefix="/website")
 @websites_blueprint.get("/get")
 @cross_origin()
 def get_websites():
-    refresh_websites()
     websites = Websites.query.all()
     Data = []
 
@@ -31,8 +30,8 @@ def get_websites():
     return jsonify(Data), 200
 
 
+@websites_blueprint.post("/refresh")
 def refresh_websites():
-    print("Refresing websites")
     website = Websites.query.all()
     Data = []
 
@@ -74,4 +73,4 @@ def refresh_websites():
         db.session.add(website)
         db.session.commit()
 
-    return True
+    return get_websites()

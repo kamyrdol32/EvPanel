@@ -9,7 +9,11 @@ import Loader from "../Components/Loader.jsx";
 // Code
 export default function Home() {
 
-    const {isLoading} = useQuery(['Websites'], fetchWebsites)
+    useEffect(() => {
+        fetchWebsites()
+    })
+
+    const {isLoading} =  useQuery(['WebsitesRefresh'], fetchWebsitesRefresh)
 
     const {isUser} = useContext(authContext)
     const [websites, setWebsites] = useState([])
@@ -23,6 +27,17 @@ export default function Home() {
 
         return data
     }
+
+    function fetchWebsitesRefresh() {
+        const data = axiosGet("/api/v1/website/refresh", {}, true)
+
+        data.then((response) => {
+            setWebsites(response.data)
+        })
+
+        return data
+    }
+
 
     if (isLoading) return <Loader/>
 
