@@ -55,27 +55,27 @@ export default function Home() {
                                                     {item.url}
                                                 </a>
                                             </div>
-                                            <div className=" inline-flex items-center text-base font-semibold">
+                                            <div className=" inline-flex items-center font-semibold">
                                                 {item.status_backend === "Online" ? (
                                                     <div
-                                                        className="text-green-800 px-2 py-1 rounded-full text-xs">
+                                                        className="inline-flex items-center text-base font-semibold text-green-600">
                                                         {item.status_backend}
                                                     </div>
                                                 ) : (
                                                     <div
-                                                        className="text-red-800 px-2 py-1 rounded-full text-xs">
+                                                        className="inline-flex items-center text-base font-semibold text-red-600">
                                                         {item.status_backend}
                                                     </div>
                                                 )}
                                                 |
                                                 {item.status_frontend === "Online" ? (
                                                     <div
-                                                        className="text-green-800 px-2 py-1 rounded-full text-xs">
+                                                        className="inline-flex items-center text-base font-semibold text-green-600">
                                                         {item.status_frontend}
                                                     </div>
                                                 ) : (
                                                     <div
-                                                        className="text-red-800 px-2 py-1 rounded-full text-xs">
+                                                        className="inline-flex items-center text-base font-semibold text-red-600">
                                                         {item.status_frontend}
                                                     </div>
                                                 )}
