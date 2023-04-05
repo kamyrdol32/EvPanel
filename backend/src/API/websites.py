@@ -23,7 +23,8 @@ def get_websites():
                 "id": website.id,
                 "name": website.name,
                 "url": website.url,
-                "status": website.status,
+                "status_backend": website.status_backend,
+                "status_frontend": website.status_frontend,
             }
         )
 
@@ -36,25 +37,40 @@ def refresh_websites():
     Data = []
 
     for website in website:
-        try:
-            if website.endpoint_backend == 'localhost':
-                website.status = "Online"
-                print("Online " + str(website.name))
-            else:
-                if website.endpoint_backend:
-                    response = requests.get(website.endpoint_backend)
-                    if response.status_code == 200:
-                        website.status = "Online"
-                        print("Online " + str(website.name))
-                    else:
-                        website.status = response.status_code
-                        print("Offline " + str(website.name))
 
+        # Backend
+
+        try:
+            website.status_backend = "Online"
+            if website.endpoint_backend and website.endpoint_backend != "localhost":
+                response = requests.get(website.endpoint_backend)
+                if response.status_code == 200:
+                    website.status_backend = "Online"
                 else:
-                    website.status = "Unknown"
+                    website.status_backend = "Offline"
+            else:
+                website.status_backend = "Unknown"
 
         except Exception as error:
             website.status = error
+            print(error)
+
+        # Frontend
+
+        try:
+            website.status_frontend = "Online"
+            if website.endpoint_frontend:
+                response = requests.get(website.endpoint_frontend)
+                if response.status_code == 200:
+                    website.status_frontend = "Online"
+                else:
+                    website.status_frontend = "Offline"
+            else:
+                website.status_frontend = "Unknown"
+
+
+        except Exception as error:
+            website.status_frontend = error
             print(error)
 
         db.session.add(website)
