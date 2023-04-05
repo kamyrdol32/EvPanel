@@ -6,6 +6,10 @@ export default defineConfig({
     plugins: [react()],
     server: {
         origin: "https://evpanel.kamilzeglen.pl",
+        hmr: {
+            host: 'https://evpanel.kamilzeglen.pl',
+            port: 3001,
+        },
         watch: {
             usePolling: true,
         },
