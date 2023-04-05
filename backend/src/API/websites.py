@@ -40,26 +40,24 @@ def refresh_websites():
         # Backend
 
         try:
-            website.status_backend = "Online"
             if website.endpoint_backend and website.endpoint_backend != "localhost":
                 response = requests.get(website.endpoint_backend)
                 if response.status_code == 200:
                     website.status_backend = "Online"
                 else:
                     website.status_backend = "Offline"
-            elif website.endpoint_backend == "localhost":
-                website.status_backend = "Online"
+            # elif website.endpoint_backend == "localhost":
+            #     website.status_backend = "Online"
             else:
                 website.status_backend = "None"
 
         except Exception as error:
-            website.status = error
+            website.status_backend = error
             print(error)
 
         # Frontend
 
         try:
-            website.status_frontend = "Online"
             if website.endpoint_frontend:
                 response = requests.get(website.endpoint_frontend)
                 if response.status_code == 200:
