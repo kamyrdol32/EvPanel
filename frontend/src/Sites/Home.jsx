@@ -34,7 +34,7 @@ export default function Home() {
 
             <div className="flex flex-col items-center justify-center">
                 <div
-                    className="w-full max-w-2xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 bg-primary dark:bg-dark_primary dark:border-gray-700">
+                    className="w-full max-w-xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 bg-primary dark:bg-dark_primary dark:border-gray-700">
                     <div className="flow-root">
                         <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
                             {websites && websites.map((item, index) => (
