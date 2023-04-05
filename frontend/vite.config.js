@@ -6,6 +6,7 @@ export default defineConfig({
     plugins: [react()],
     server: {
         origin: "https://evpanel.kamilzeglen.pl",
+        https: true,
         watch: {
             usePolling: true,
         },
