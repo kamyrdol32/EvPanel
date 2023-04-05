@@ -12,6 +12,7 @@ export default function Home() {
     const {isUser} = useContext(authContext)
     const [websites, setWebsites] = useState([])
 
+    const {isLoading} = useQuery(['Websites'], fetchWebsites, {refetchOnWindowFocus: false})
     useQuery(['WebsitesRefresh'], fetchWebsitesRefresh)
 
 
@@ -41,6 +42,8 @@ export default function Home() {
             return data
         }
     }
+
+    if (isLoading) return <Loader/>
 
     return (
         <>
