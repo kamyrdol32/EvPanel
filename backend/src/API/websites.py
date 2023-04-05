@@ -30,7 +30,7 @@ def get_websites():
     return jsonify(Data), 200
 
 
-@websites_blueprint.post("/refresh")
+@websites_blueprint.get("/refresh")
 def refresh_websites():
     website = Websites.query.all()
     Data = []

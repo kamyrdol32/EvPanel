@@ -9,12 +9,16 @@ import Loader from "../Components/Loader.jsx";
 // Code
 export default function Home() {
 
-    fetchWebsites()
+    const {isUser} = useContext(authContext)
+    const [websites, setWebsites] = useState([])
 
     const {isLoading} =  useQuery(['WebsitesRefresh'], fetchWebsitesRefresh)
 
-    const {isUser} = useContext(authContext)
-    const [websites, setWebsites] = useState([])
+
+    useEffect(() => {
+        fetchWebsites()
+    }, [])
+
 
     function fetchWebsites() {
         const data = axiosGet("/api/v1/website/get", {}, true)
@@ -27,13 +31,15 @@ export default function Home() {
     }
 
     function fetchWebsitesRefresh() {
-        const data = axiosGet("/api/v1/website/refresh", {}, true)
+        if (websites.length !== 0) {
+            const data = axiosGet("/api/v1/website/refresh", {}, true)
 
-        data.then((response) => {
-            setWebsites(response.data)
-        })
+            data.then((response) => {
+                setWebsites(response.data)
+            })
 
-        return data
+            return data
+        }
     }
 
 
