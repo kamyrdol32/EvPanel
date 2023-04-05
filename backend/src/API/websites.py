@@ -50,7 +50,7 @@ def refresh_websites():
             elif website.endpoint_backend == "localhost":
                 website.status_backend = "Online"
             else:
-                website.status_backend = "Unknown"
+                website.status_backend = "None"
 
         except Exception as error:
             website.status = error
@@ -67,7 +67,7 @@ def refresh_websites():
                 else:
                     website.status_frontend = "Offline"
             else:
-                website.status_frontend = "Unknown"
+                website.status_frontend = "None"
 
         except Exception as error:
             website.status_frontend = error
