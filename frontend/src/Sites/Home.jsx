@@ -58,24 +58,24 @@ export default function Home() {
                                             <div className=" inline-flex items-center font-semibold">
                                                 {item.status_backend === "Online" ? (
                                                     <div
-                                                        className="inline-flex items-center text-base font-semibold text-green-600">
+                                                        className="p-2 inline-flex items-center text-base font-semibold text-green-600">
                                                         {item.status_backend}
                                                     </div>
                                                 ) : (
                                                     <div
-                                                        className="inline-flex items-center text-base font-semibold text-red-600">
+                                                        className="p-2 inline-flex items-center text-base font-semibold text-red-600">
                                                         {item.status_backend}
                                                     </div>
                                                 )}
                                                 |
                                                 {item.status_frontend === "Online" ? (
                                                     <div
-                                                        className="inline-flex items-center text-base font-semibold text-green-600">
+                                                        className="p-2 inline-flex items-center text-base font-semibold text-green-600">
                                                         {item.status_frontend}
                                                     </div>
                                                 ) : (
                                                     <div
-                                                        className="inline-flex items-center text-base font-semibold text-red-600">
+                                                        className="p-2 inline-flex items-center text-base font-semibold text-red-600">
                                                         {item.status_frontend}
                                                     </div>
                                                 )}
