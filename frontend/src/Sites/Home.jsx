@@ -56,7 +56,29 @@ export default function Home() {
                                                 </a>
                                             </div>
                                             <div className=" inline-flex items-center text-base font-semibold">
-                                                {item.status_backend} | {item.status_frontend}
+                                                {item.status_backend === "Online" ? (
+                                                    <div
+                                                        className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">
+                                                        {item.status_backend}
+                                                    </div>
+                                                ) : (
+                                                    <div
+                                                        className="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">
+                                                        {item.status_backend}
+                                                    </div>
+                                                )}
+                                                |
+                                                {item.status_frontend === "Online" ? (
+                                                    <div
+                                                        className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">
+                                                        {item.status_frontend}
+                                                    </div>
+                                                ) : (
+                                                    <div
+                                                        className="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">
+                                                        {item.status_frontend}
+                                                    </div>
+                                                )}
                                             </div>
 
                                         </div>
