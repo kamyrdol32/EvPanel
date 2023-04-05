@@ -37,7 +37,6 @@ def refresh_websites():
     Data = []
 
     for website in website:
-
         # Backend
 
         try:
@@ -69,7 +68,6 @@ def refresh_websites():
                     website.status_frontend = "Offline"
             else:
                 website.status_frontend = "Unknown"
-
 
         except Exception as error:
             website.status_frontend = error
