@@ -9,9 +9,7 @@ import Loader from "../Components/Loader.jsx";
 // Code
 export default function Home() {
 
-    useEffect(() => {
-        fetchWebsites()
-    })
+    fetchWebsites()
 
     const {isLoading} =  useQuery(['WebsitesRefresh'], fetchWebsitesRefresh)
 
