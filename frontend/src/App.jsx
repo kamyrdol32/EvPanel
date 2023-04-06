@@ -13,7 +13,7 @@ import Home from "./Sites/Home";
 
 // Imports
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {createContext} from "react";
+import {createContext, useEffect} from "react";
 import {toast, ToastContainer} from "react-toastify";
 import useAuth from "./Contexts/Auth.jsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
@@ -30,8 +30,11 @@ function App() {
 
     const {setUser, removeUser, isUser, getUser, fetchAuthorization} = useAuth()
 
-    toast.info("Demo account:")
-    toast.info("admin/123456")
+
+    useEffect(() => {
+        toast.info("Demo account:")
+        toast.info("admin/123456")
+    }, [])
 
     return (
         <div className="min-h-screen bg-secondary dark:bg-dark_secondary text-gray-900 dark:text-white">

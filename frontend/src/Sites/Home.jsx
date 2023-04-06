@@ -53,9 +53,36 @@ export default function Home() {
 
             <div className="flex flex-col items-center justify-center">
                 <div
-                    className="w-full max-w-xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 bg-primary dark:bg-dark_primary dark:border-gray-700">
+                    className="w-full max-w-xl px-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 bg-primary dark:bg-dark_primary dark:border-gray-700">
                     <div className="flow-root">
                         <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
+
+                            {/* TITLE */}
+
+                            <li className="py-1 pb-3 font-bold">
+                                <div className="flex items-center space-x-4">
+                                    <div className="flex-1 min-w-0 pl-5 ml-4">
+                                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                            Website
+                                        </p>
+                                    </div>
+                                    <div className="inline-flex w-1/4 justify-center items-center font-semibold">
+                                        <div
+                                            className="p-2 inline-flex items-center text-base font-semibold">
+                                            Backend
+                                        </div>
+                                        |
+                                        <div
+                                            className="p-2 inline-flex items-center text-base font-semibold">
+                                            Frontend
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                            {/* DATA */}
+
                             {websites && websites.map((item, index) => (
                                 <div key={item.name}>
                                     <li className="py-3 sm:py-4">
@@ -74,7 +101,7 @@ export default function Home() {
                                                     {item.url}
                                                 </a>
                                             </div>
-                                            <div className=" inline-flex items-center font-semibold">
+                                            <div className="inline-flex w-1/4 justify-center items-center font-semibold">
                                                 {item.status_backend === "Online" ? (
                                                     <div
                                                         className="p-2 inline-flex items-center text-base font-semibold text-green-600">
