@@ -52,7 +52,6 @@ def refresh_websites():
 
         except Exception as error:
             website.status_backend = "Offline"
-            print(error)
 
         # Frontend
 
@@ -68,7 +67,6 @@ def refresh_websites():
 
         except Exception as error:
             website.status_frontend = "Offline"
-            print(error)
 
         db.session.add(website)
         db.session.commit()
