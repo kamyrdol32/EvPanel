@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify, request
+from flask import jsonify, request
 from flask_cors import cross_origin
-from flask_jwt_extended import get_jwt, jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_openapi3 import APIBlueprint
 
 from ..app import db
@@ -27,9 +27,9 @@ def get_jobs():
                 .all()
             )
 
-            Data = []
+            data = []
             for job in jobs:
-                Data.append(
+                data.append(
                     {
                         "id": job.id,
                         "name": job.name,
@@ -39,16 +39,16 @@ def get_jobs():
                     }
                 )
 
-            return jsonify(Data), 200
+            return jsonify(data), 200
 
         else:
             user = get_jwt_identity()
             user_id = Users.query.filter_by(username=user).first().id
             jobs = Jobs.query.filter_by(user_id=user_id).all()
 
-            Data = []
+            data = []
             for job in jobs:
-                Data.append(
+                data.append(
                     {
                         "id": job.id,
                         "name": job.name,
@@ -57,7 +57,7 @@ def get_jobs():
                         "created_data": job.created_data,
                     }
                 )
-            return jsonify(Data), 200
+            return jsonify(data), 200
 
     except Exception as error:
         return jsonify({"error": str(error)}), 400
