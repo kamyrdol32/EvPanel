@@ -5,9 +5,12 @@ import {HiWifi} from "react-icons/hi";
 import {axiosGet} from "../Others/requests.jsx";
 import {useQuery} from "@tanstack/react-query";
 import Loader from "../Components/Loader.jsx";
+import {useTranslation} from "react-i18next";
 
 // Code
 export default function Home() {
+
+    const {t, i18n} = useTranslation();
 
     const {isUser} = useContext(authContext)
     const [websites, setWebsites] = useState([])
@@ -48,7 +51,7 @@ export default function Home() {
     return (
         <>
             <div className="flex flex-col items-center justify-center m-5 p-5">
-                <h1 className="font-bold text-4xl p-5">Websites monitoring</h1>
+                <h1 className="font-bold text-4xl p-5">{t("app_monitoring")}</h1>
             </div>
 
             <div className="flex flex-col items-center justify-center">
@@ -63,13 +66,13 @@ export default function Home() {
                                 <div className="flex items-center space-x-4">
                                     <div className="flex-1 min-w-0 pl-5 ml-4">
                                         <p className="text-gray-900 dark:text-white">
-                                            Website
+                                            {t("app")}
                                         </p>
                                     </div>
                                     <div className="inline-flex w-1/4 justify-center items-center">
                                         <div
                                             className="p-2 inline-flex items-center">
-                                            Website status
+                                            {t("app_status")}
                                         </div>
                                     </div>
 
