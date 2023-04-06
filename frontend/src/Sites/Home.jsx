@@ -59,22 +59,17 @@ export default function Home() {
 
                             {/* TITLE */}
 
-                            <li className="py-1 pb-3 font-bold">
+                            <li className="py-1 pb-3 font-bold font-semibold">
                                 <div className="flex items-center space-x-4">
                                     <div className="flex-1 min-w-0 pl-5 ml-4">
-                                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                        <p className="text-gray-900 dark:text-white">
                                             Website
                                         </p>
                                     </div>
-                                    <div className="inline-flex w-1/4 justify-center items-center font-semibold">
+                                    <div className="inline-flex w-1/4 justify-center items-center">
                                         <div
-                                            className="p-2 inline-flex items-center text-base font-semibold">
-                                            Backend
-                                        </div>
-                                        |
-                                        <div
-                                            className="p-2 inline-flex items-center text-base font-semibold">
-                                            Frontend
+                                            className="p-2 inline-flex items-center">
+                                            Website status
                                         </div>
                                     </div>
 
