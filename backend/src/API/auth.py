@@ -26,15 +26,15 @@ def register():
         email = request.json.get("email")
         username = request.json.get("username")
         password = request.json.get("password")
-        confirmPassword = request.json.get("confirmPassword")
+        confirm_password = request.json.get("confirmPassword")
 
-        if not email or not password or not confirmPassword or not username:
+        if not email or not password or not confirm_password or not username:
             return jsonify({"error": "Please fill all fields"}), 400
 
-        if password != confirmPassword:
+        if password != confirm_password:
             return jsonify({"error": "Passwords do not match"}), 400
 
-        if len(password) < 6 or len(confirmPassword) < 6:
+        if len(password) < 6 or len(confirm_password) < 6:
             return (
                 jsonify({"error": "Password must be at least 6 characters long"}),
                 400,
@@ -128,7 +128,7 @@ def logout():
 
 @auth_blueprint.get("/activate")
 @cross_origin()
-def activate(key=None):
+def activate():
     try:
         key = request.args.get("KEY")
 

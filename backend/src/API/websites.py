@@ -1,6 +1,5 @@
 import requests
-
-from flask import jsonify, request
+from flask import jsonify
 from flask_cors import cross_origin
 from flask_openapi3 import APIBlueprint
 
@@ -33,7 +32,6 @@ def get_websites():
 @websites_blueprint.get("/refresh")
 def refresh_websites():
     website = Websites.query.all()
-    Data = []
 
     for website in website:
         # Backend
@@ -51,6 +49,7 @@ def refresh_websites():
                 website.status_backend = "None"
 
         except Exception as error:
+            print(error)
             website.status_backend = "Offline"
 
         # Frontend
@@ -66,6 +65,7 @@ def refresh_websites():
                 website.status_frontend = "None"
 
         except Exception as error:
+            print(error)
             website.status_frontend = "Offline"
 
         db.session.add(website)
