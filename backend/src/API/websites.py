@@ -34,6 +34,7 @@ def refresh_websites():
     website = Websites.query.all()
 
     for website in website:
+
         # Backend
 
         try:
