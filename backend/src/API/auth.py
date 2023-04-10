@@ -1,6 +1,7 @@
 from datetime import datetime, timezone, timedelta
 
 from flask import jsonify, request
+from flask_bcrypt import Bcrypt
 from flask_cors import cross_origin
 from flask_jwt_extended import (
     create_access_token,
@@ -12,9 +13,11 @@ from flask_jwt_extended import (
 )
 from flask_openapi3 import APIBlueprint
 
-from ..app import db, bcrypt
+from .. import db
 from ..models import Users
 from ..others import passwordGenerator, send_welcome_email
+
+bcrypt = Bcrypt()
 
 auth_blueprint = APIBlueprint("auth", __name__, url_prefix="/auth")
 
