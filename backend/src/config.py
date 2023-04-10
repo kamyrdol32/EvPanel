@@ -3,7 +3,6 @@ import os
 
 
 class Config(object):
-
     # Project
     PROJECT_NAME = "EvPanel"
     PROJECT_VERSION = "0.1.0"
@@ -53,6 +52,6 @@ class DevelopmentConfig(Config):
 
 
 class TestingConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     DEBUG = True
     TESTING = True

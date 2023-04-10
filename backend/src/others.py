@@ -13,15 +13,15 @@ def passwordGenerator(username):
 def send_welcome_email(username, email, key):
     msg = Message("EvPanel - Potwierdzenie rejestracji", recipients=[email])
     msg.body = (
-            "Witaj "
-            + str(username)
-            + "!\n\n"
-            + "Aby potwierdzić rejestrację kliknij w poniższy link:\n\n"
-            + "https://evpanel.kamilzeglen.pl/activate/"
-            + str(key)
-            + "\n\n"
-            + "Pozdrawiamy,\n"
-            + "Zespół EvPanel"
+        "Witaj "
+        + str(username)
+        + "!\n\n"
+        + "Aby potwierdzić rejestrację kliknij w poniższy link:\n\n"
+        + "https://evpanel.kamilzeglen.pl/activate/"
+        + str(key)
+        + "\n\n"
+        + "Pozdrawiamy,\n"
+        + "Zespół EvPanel"
     )
     mail.send(msg)
     return "Message sent!"

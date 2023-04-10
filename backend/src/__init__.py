@@ -17,7 +17,6 @@ bcrypt = Bcrypt()
 
 # App initialization
 def create_app(mode="Development"):
-
     # Mode
     print("Running in {} mode".format(mode))
 
