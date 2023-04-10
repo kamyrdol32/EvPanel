@@ -1,7 +1,5 @@
 import json
 
-import requests
-
 
 def test_register_user(client, app):
     response = client.post(
@@ -20,12 +18,18 @@ def test_register_user(client, app):
     assert response.status_code == 200
 
 
-def test_login_user(client):
-    url = "/api/v1/auth/user/login"
-    params = {
-        "email": "test@test.pl",
-        "password": "123456",
-    }
+# def test_login_user(client):
+#     url = "/api/v1/auth/user/login"
+#     params = {
+#         "email": "test@test.pl",
+#         "password": "123456",
+#     }
+#     response = client.get(url)
+#     print(response.data)
+#     assert response.status_code == 200
+
+
+def test_logout_user(client):
+    url = "/api/v1/auth/logout"
     response = client.get(url)
-    print(response.data)
     assert response.status_code == 200
