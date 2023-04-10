@@ -40,7 +40,7 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-          virtualenvs-path: .venv
+          virtualenvs-path:
           installer-parallel: true
 
       - name: Install dependencies
@@ -50,6 +50,7 @@ jobs:
 
       - name: Test with pytest
         run: |
+          cd backend
           ls
           source .venv/bin/activate
           python -m pytest
