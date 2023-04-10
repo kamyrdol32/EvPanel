@@ -3,7 +3,7 @@ from flask_cors import cross_origin
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_openapi3 import APIBlueprint
 
-from ..app import db
+from .. import db
 from ..models import Jobs, Users
 
 job_blueprint = APIBlueprint("job", __name__, url_prefix="/job")

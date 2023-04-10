@@ -3,7 +3,7 @@ from flask import jsonify
 from flask_cors import cross_origin
 from flask_openapi3 import APIBlueprint
 
-from ..app import db
+from .. import db
 from ..models import Websites
 
 websites_blueprint = APIBlueprint("website", __name__, url_prefix="/website")
