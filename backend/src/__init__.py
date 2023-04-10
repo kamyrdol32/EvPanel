@@ -7,12 +7,9 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from flask_openapi3 import OpenAPI, Info, APIBlueprint
-from flask_sqlalchemy import SQLAlchemy
 
-
-mail = Mail()
-db = SQLAlchemy()
-bcrypt = Bcrypt()
+from backend.src.models import db
+from backend.src.others import mail
 
 
 # App initialization
