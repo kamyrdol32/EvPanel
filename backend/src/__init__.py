@@ -8,8 +8,8 @@ from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from flask_openapi3 import OpenAPI, Info, APIBlueprint
 
-from backend.src.models import db
-from backend.src.others import mail
+from .models import db
+from .others import mail
 
 
 # App initialization
