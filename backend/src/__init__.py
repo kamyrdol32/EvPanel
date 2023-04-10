@@ -28,7 +28,7 @@ def create_app(mode="Development"):
 
     # Config
     load_dotenv()
-    app.config.from_object("backend.src.config.{}Config".format(mode))
+    app.config.from_object(".config.{}Config".format(mode))
 
     # Extensions
     CORS(app, supports_credentials=True)
