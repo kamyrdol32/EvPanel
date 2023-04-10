@@ -36,7 +36,6 @@ class Config(object):
     MAIL_USE_SSL = True
     MAIL_DEFAULT_SENDER = os.getenv("MAIL_USERNAME")
     MAIL_SUPPRESS_SEND = False
-    MAIL_DEBUG = True
 
 
 class ProductionConfig(Config):
