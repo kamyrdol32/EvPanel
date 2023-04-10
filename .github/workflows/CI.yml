@@ -60,5 +60,4 @@ jobs:
         run: |
           cd backend
           ls
-          source .venv/bin/activate
-          pytest
+          python -m pytest
