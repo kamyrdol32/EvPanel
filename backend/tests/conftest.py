@@ -1,6 +1,7 @@
 import pytest
 
-from ..src import create_app, db
+from backend.src import create_app
+from backend.src.models import db
 
 
 @pytest.fixture()
