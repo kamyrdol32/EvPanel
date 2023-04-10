@@ -40,4 +40,7 @@ jobs:
         run: |
           cd backend
           poetry install
-          poetry run pytest
+      - name: Test with pytest
+        run: |
+          cd ..
+          python -m pytest
