@@ -1,21 +1,41 @@
 version: '3.8'
 
 services:
-
     evpanel-frontend:
         build:
             context: ./frontend
             dockerfile: Dockerfile
         container_name: evpanel-frontend
+        env_file:
+            - frontend/.env
         restart: always
         ports:
-            - 3001:3001
+            - "3001:3001"
+        networks:
+            - evpanel_default
 
     evpanel-backend:
         build:
             context: ./backend
             dockerfile: Dockerfile
         container_name: evpanel-backend
+        env_file:
+            - backend/.env
         restart: always
         ports:
-            - 5001:5001
+            - "5001:5001"
+        networks:
+            - evpanel_default
+            - portfolio_old_default
+            - hyped_default
+            - sezonowyogrod_default
+
+networks:
+    evpanel_default:
+        external: true
+    portfolio_old_default:
+        external: true
+    hyped_default:
+        external: true
+    sezonowyogrod_default:
+        external: true

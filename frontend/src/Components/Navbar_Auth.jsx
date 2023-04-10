@@ -12,7 +12,7 @@ export default function Navbar_Auth() {
             <div className="hidden sm:block">
                 <div
                     className="
-                        inline-flex w-full justify-center rounded-lg border border-gray-900 bg-indigo-900 px-4 py-2 text-sm font-medium text-white shadow-sm
+                        inline-flex w-full justify-center rounded-lg border border-secondary dark:border-dark_secondary bg-accent px-4 py-2 text-sm font-medium text-white shadow-sm
                         focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                 >
                     {t("account")}

@@ -1,6 +1,8 @@
 from datetime import datetime
 
-from .app import app, db
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 
 class Users(db.Model):
@@ -46,7 +48,7 @@ class Jobs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
     name = db.Column(db.String(128), unique=False, nullable=False)
     company = db.Column(db.String(128), unique=False, nullable=False)
-    url = db.Column(db.String(128), unique=False, nullable=False)
+    url = db.Column(db.String(256), unique=False, nullable=False)
     created_data = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __init__(self, name, company, url, user_id):
@@ -57,3 +59,22 @@ class Jobs(db.Model):
 
     def __repr__(self):
         return "<Jobs %r>" % self.Name
+
+
+class Websites(db.Model):
+    __tablename__ = "Websites"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), unique=False, nullable=False)
+    url = db.Column(db.String(256), unique=False, nullable=True)
+    endpoint_backend = db.Column(db.String(256), unique=False, nullable=True)
+    endpoint_frontend = db.Column(db.String(256), unique=False, nullable=True)
+    status_backend = db.Column(db.String(512), unique=False, nullable=True)
+    status_frontend = db.Column(db.String(512), unique=False, nullable=True)
+
+    def __init__(self, name, url, user_id):
+        self.name = name
+        self.url = url
+        self.user_id = user_id
+
+    def __repr__(self):
+        return "<Websites %r>" % self.Name

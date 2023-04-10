@@ -1,9 +1,9 @@
 import hashlib
 import random
 
-from flask_mail import Message
+from flask_mail import Message, Mail
 
-from .app import mail
+mail = Mail()
 
 
 def passwordGenerator(username):

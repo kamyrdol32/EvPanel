@@ -60,9 +60,8 @@ export default function Login() {
                                 autoComplete="email"
                                 required
                                 className="
-                                relative block w-full appearance-none rounded-none rounded-t-md border border-indigo-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm
-                                text-gray-800  bg-white placeholder-gray-800
-                                dark:text-white dark:bg-gray-800 dark:placeholder-white
+                                relative block w-full appearance-none rounded-none rounded-t-md border border-accent px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm
+                                dark:bg-dark_secondary dark:placeholder-white
                                 "
                                 placeholder="Email address"
                                 onChange={(e) => setEmail(e.target.value)}
@@ -79,9 +78,8 @@ export default function Login() {
                                 autoComplete="current-password"
                                 required
                                 className="
-                                relative block w-full appearance-none rounded-none rounded-t-md border border-indigo-300 px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm
-                                text-gray-800  bg-white placeholder-gray-800
-                                dark:text-white dark:bg-gray-800 dark:placeholder-white
+                                relative block w-full appearance-none rounded-none rounded-t-md border border-accent px-3 py-2 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm
+                                dark:bg-dark_secondary dark:placeholder-white
                                 " placeholder={t("password")}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
@@ -96,13 +94,13 @@ export default function Login() {
                                 type="checkbox"
                                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                             />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                            <label htmlFor="remember-me" className="ml-2 block text-sm">
                                 {t("rember_me")}
                             </label>
                         </div>
 
                         <div className="text-sm">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-300">
+                            <a href="#" className="font-medium text-indigo-600 hover:text-accent">
                                 {t("forgot_your_password?")}
                             </a>
                         </div>
@@ -112,7 +110,7 @@ export default function Login() {
 
                 <div className="space-y-1">
                     <button
-                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-accent py-2 px-4 text-sm font-medium text-white hover:bg-accent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         onClick={fetchLogin}
                     >
                         {t("sign_in")}
@@ -121,10 +119,7 @@ export default function Login() {
                         <NavLink to="/register" key="register">
                             <button
                                 className="
-                                group relative flex w-full justify-center rounded-md border border-gray-900 py-2 px-4 text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
-                                text-gray-800  bg-white
-                                dark:text-white dark:bg-gray-800
-                                "
+                                group relative flex w-full justify-center rounded-md border bg-secondary dark:bg-dark_primary border-accent py-2 px-4 text-sm font-medium hover:bg-accent hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                                 {t("sign_up")}
                             </button>

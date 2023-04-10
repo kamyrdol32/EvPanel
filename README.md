@@ -28,29 +28,26 @@ This web application is a personal project aimed at acquiring new programming kn
   - **Docker & Docker Compose**
   
 ### Environment Variables
-To run this project, you will need to add the following environment variables to your .env file located in `backend` directory:
+To run this project, you will need to add the following environment file on backend directory:
 
+_**.env**_
 ```bash
 SECRET_KEY=""
-SQLALCHEMY_DATABASE_URI="mysql+pymysql://DB:PASSWORD@IP:PORT/DB_NAME"
+SQLALCHEMY_DATABASE_URI=""
 JWT_SECRET_KEY=""
 MAIL_USERNAME=""
 MAIL_PASSWORD=""
 ```
 
-and .env file located in `frontend` directory:
+and frontend directory:
+
+**.env**
 ```bash
 VITE_I18NEXUS_API_KEY=""
 ```
 
 ### Instruction
-To deploy this project create docker network
-
-```bash
-docker network create evpanel_default
-```
-
-and run project
+To deploy this project run project
 
 ```bash
 docker-compose up

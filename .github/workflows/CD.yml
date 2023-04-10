@@ -1,17 +1,15 @@
-name: Deploy to Remote Server
-on:
-  push:
-    branches:
-      - master
+name: CD
+
+on: [ push ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: ./github/workflows/CI.yml
     environment: deploy
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Deploy code
         uses: appleboy/ssh-action@master
         with:
@@ -21,5 +19,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd Projects/evpanel/
-            git pull origin master
+            git pull origin main
             docker compose up -d --build
+            docker restart nginx_proxy
