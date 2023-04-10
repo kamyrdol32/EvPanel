@@ -38,6 +38,7 @@ jobs:
           pip install poetry
       - name: Install dependencies
         run: |
+          cd backend
           poetry install
       - name: Test with pytest
         run: |
