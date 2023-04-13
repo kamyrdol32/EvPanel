@@ -12,14 +12,14 @@ export default defineConfig({
         strictPort: true,
         port: 3001, // you can replace this port with any port
         proxy: {
-            // '/auth': {
-            //     target: 'http://evpanel-backend:5001',
-            //     changeOrigin: true,
-            // },
-            // '/api': {
-            //     target: 'http://evpanel-backend:5001',
-            //     changeOrigin: true,
-            // },
+            '/auth': {
+                target: 'http://evpanel-backend:5001',
+                changeOrigin: true,
+            },
+            '/api': {
+                target: 'http://evpanel-backend:5001',
+                changeOrigin: true,
+            },
             // '/auth': {
             //     target: 'http://0.0.0.0:5001',
             //     changeOrigin: true,
