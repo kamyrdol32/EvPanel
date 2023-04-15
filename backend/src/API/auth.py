@@ -44,10 +44,10 @@ def register():
             )
 
         if Users.query.filter_by(email=email).first():
-            return jsonify({"error": "Email already exists"}), 400
+            return jsonify({"error": "Fill correct email"}), 400
 
         if Users.query.filter_by(username=username).first():
-            return jsonify({"error": "Username already exists"}), 400
+            return jsonify({"error": "Fill correct username"}), 400
 
         # Hashing password
         key = passwordGenerator(username)
