@@ -7,7 +7,7 @@ This web application is a personal project aimed at acquiring new programming kn
 
 | Author | Backend | Frontend |
 | :---: | :---: | :---: |
-| **Kamil Żegleń** ([kamyrdol32](https://github.com/kamyrdol32))  | ![100%](https://progress-bar.dev/100)  | ![100%](https://progress-bar.dev/100)  |
+| **Kamil Żegleń** ([kamyrdol32](https://github.com/kamyrdol32))  | 100% | 100% |
 
 ## Technologies used:
   - **Python**:
